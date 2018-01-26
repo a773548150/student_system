@@ -1,0 +1,17 @@
+h1 {
+    margin-bottom: 30px;
+}
+form {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    margin-left: -98px;
+}
+
+#linkToModify {
+    margin-left: 50px;
+}
+
+#inputUsername {
+
+}
