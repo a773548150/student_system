@@ -29,11 +29,30 @@
         </tbody>
     </table>
 
+    <div class="thead">
+        <input placeholder="请输入搜索内容" id="searchTitle" type="text"/>
+        <button id="search" class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon"></i> 搜索</button>
+        <button id="add" class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon"></i> 新增</button>
+        <button id="change" class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon"></i> 编辑</button>
+        <button id="del" class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon"></i> 删除</button>
+    </div>
+
+    <table id="table" class="table table-hover display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>名字</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>专业</th>
+        </tr>
+        </thead>
+    </table>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-table.js"></script>
-    <script src="js/bootstrap-table-zh-CN.js"></script>
+    <!--<script src="js/bootstrap-table.js"></script>-->
+    <!--<script src="js/bootstrap-table-zh-CN.js"></script>-->
+    <script src="js/datatables.min.js"></script>
     <script src="js/student_message.js"></script>
 </body>
 </html>
