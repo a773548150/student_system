@@ -1,38 +1,64 @@
 <!DOCTYPE html>
+<meta name="robots" content="noindex">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>管理课程信息</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/course_message.css" rel="stylesheet">
-    <title>Title</title>
 </head>
 <body>
 <h3>管理课程信息</h3>
-<div class="form-inline" id="top_box">
-    <div class="form-group">
-        <label for="courseMessage">课程号/课程名：</label>
-        <input type="text" class="form-control" id="courseMessage" name="courseMessage" placeholder="请输入课程号或课程名">
+<div class="report_card" id="reportCard">
+    <div class="input-group input-group" id="selectCourseNumber">
+        <span class="input-group-addon" id="sizing-addon1">课程号</span>
+        <input type="text" class="form-control" id="courseNumber" v-model="courseMessage.courseMessage" placeholder="请填入课程号/课程名" aria-describedby="sizing-addon1">
+        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
     </div>
-    <button type="submit" class="btn btn-default" id="submit">
-        <span class="glyphicon glyphicon-search" aria-hidden="true">搜索</span>
-    </button>
+    <table class="table table-hover">
+        <caption>学生信息录入/处理</caption>
+        <tbody>
+        <tr>
+            <td width="170">课程号:<input type="text" v-model="addArr.number" class="form-control"></td>
+            <td width="170">课程名:<input type="text" v-model="addArr.name" class="form-control"></td>
+            <td width="170">学分:<input type="text" v-model="addArr.credit" class="form-control"></td>
+            <td width="170">开课时间:<input type="text" v-model="addArr.start_time" class="form-control"></td>
+            <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
+            <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-default" href="student.html" role="button">回到主页</a>
+    <table class="table table-hover table-striped">
+        <caption>课程列表</caption>
+        <thead>
+        <th width="170">课程号</th>
+        <th width="170">课程名</th>
+        <th width="170">学分</th>
+        <th width="170">开课时间</th>
+        <th colspan="2" width="120">操作</th>
+        </thead>
+        <tbody>
+        <tr v-for="item in courseArr">
+            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.name}}<input class="form-control" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.credit}}<input class="form-control" v-model="editArr.credit" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.start_time}}<input class="form-control" v-model="editArr.start_time" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="sureEdit(item.number)" v-if="item.number==nowEditCol">确认</a>
+            </td>
+            <td><a class="btn btn-default" href="javascript:void(0);" v-on:click="deleteStu(item.number)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
-<table id="table-javascript" class="table table-hover table-responsive ">
-    <thead>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">课程号</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">课程名</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">学分</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">开课时间</div></th>
-    </thead>
-    <tbody id="dataTable"></tbody>
-</table>
-
-
+<script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.js"></script>
-<script src="js/bootstrap-table-zh-CN.js"></script>
 <script src="js/course_message.js"></script>
 </body>
 </html>

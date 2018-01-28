@@ -8,12 +8,12 @@
 
 include_once("./operation_mysql.php");
 
-$name = "林晓聪";
-//$sex = "1";
-//$age = "1996-10-08";
-//$major = "软件工程";
+$name = $_POST['name'];
+$sex = $_POST['sex'];
+$age = $_POST['age'];
+$major = $_POST['major'];
+$number = $_POST['number'];
 
-$number = "1514080902117";
 
 //$message = array(
 //    'sex' => $sex,
@@ -23,9 +23,12 @@ $number = "1514080902117";
 
 $message = array(
     'name' => $name,
-    'number' => $number
+    'number' => $number,
+    'age' => $age,
+    'sex' => $sex,
+    'major' => $major
 );
-
+var_dump($message);
 $db = new DB();
-$res = $db->update_student_message($message, $name);
+$res = $db->update_student_message($message, $number);
 printf("%s rows have been update.", $res);

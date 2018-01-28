@@ -8,11 +8,15 @@
 
 include_once("./operation_mysql.php");
 
-$number = "A012";
-$start_time = "2018-09-15";
+$number = $_POST['number'];
+$name = $_POST['name'];
+$credit = $_POST['credit'];
+$start_time = $_POST['start_time'];
 
 $message = array(
     'number' => $number,
+    'name' => $name,
+    'credit' => $credit,
     'start_time' => $start_time
 );
 

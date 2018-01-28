@@ -8,12 +8,12 @@
 
 include_once("./operation_mysql.php");
 
-$studnetNumber = "1514080902230";
-$courseNumber = "A003";
-$score = "92";
+$studentNumber = $_POST['studentNumber'];
+$courseNumber = $_POST['courseNumber'];
+$score = $_POST['score'];
 
 $message = array(
-    'studentNumber' => $studnetNumber,
+    'studentNumber' => $studentNumber,
     'courseNumber' => $courseNumber,
     'score' => $score
 );

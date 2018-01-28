@@ -73,18 +73,18 @@ class DB {
         return mysqli_affected_rows($this->mysqli);
     }
 
-    public function update_student_message($message, $name) {
+    public function update_student_message($message, $number) {
 
         foreach($message as $key => $item) {
-            $query = "update t_student set $key='{$item}', update_time='{$this->currentTime}' where name = '{$name}'";
+            $query = "update t_student set $key='{$item}', update_time='{$this->currentTime}' where number = '{$number}'";
             $this->db_query($query);
         }
 
         return mysqli_affected_rows($this->mysqli);
     }
 
-    public function delete_student_message($name) {
-        $query = "update t_student set delete_time='{$this->currentTime}', status='1' where name='{$name}'";
+    public function delete_student_message($number) {
+        $query = "update t_student set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
         $this->db_query($query);
 
         return mysqli_affected_rows($this->mysqli);
@@ -92,7 +92,7 @@ class DB {
 
     public function select_student($message) {
         $content = array();
-        $query = "select name, sex, age, major, status from t_student where name like '%{$message}%' or number like '%{$message}%'";
+        $query = "select number, name, sex, age, major, status from t_student where name like '%{$message}%' or number like '%{$message}%'";
         $res = $this->db_query($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
 //            $name = $row['name'];
@@ -123,8 +123,8 @@ class DB {
         return mysqli_affected_rows($this->mysqli);
     }
 
-    public function delete_course_message($name) {
-        $query = "update t_course set delete_time='{$this->currentTime}', status='1' where name='{$name}'";
+    public function delete_course_message($number) {
+        $query = "update t_course set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
         $this->db_query($query);
 
         return mysqli_affected_rows($this->mysqli);

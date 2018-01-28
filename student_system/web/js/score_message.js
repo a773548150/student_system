@@ -1,33 +1,79 @@
-$(document).ready(function() {
-    $("#submit").click(function(e) {
-        $.ajax({
-            type:"post",
-            url:"http://localhost/student_system/src/select_score.php",
-            data:{"studentNumber": $("#studentNumber").val()},
-            dataType:"json", // 因为PHP返回数据是JSON格式，所以这里类似要用JSON
-            success: function(data) {
-                //alert(data.length);
-                createShowingTable(data);
-            },
-            error: function() {
+// $(document).ready(function(){
+//     $.ajax({
+//         url: "/src/select_student.php",
+//         type: 'post',
+//         dataType: 'json',
+//         data:{"studentNumber": $("#studentNumber").val()},
+//         success: function (data, status) {
+//             console.log(data)
+//         },
+//         fail: function (err, status) {
+//             console.log(err)
+//         }
+//     })
+// });
 
+var reportCardVm=new Vue({
+    el:'#reportCard',
+    data:{
+        selectNumber: {'studentNumber':''},
+        studyArr:[],//成绩花名册
+        insertArr:{},
+        addArr:{'studentNumber':'','courseNumber':'','score':''},//新增的表单字段
+    },
+    methods:{
+        //新增成绩
+        submitStu:function(){
+            var addArr={
+                'studentNumber':this.addArr.studentNumber,
+                'courseNumber':this.addArr.courseNumber,
+                'score':this.addArr.score
+            };
+            this.insertArr = addArr;
+            //console.log(this.insertArr);
+            insertAjax();
+            this.resetStu();
+        },
+        //复位新增表单
+        resetStu:function(){
+            this.addArr={
+                'studentNumber':'',
+                'courseNumber':'',
+                'score':''
             }
-        });
-    });
-
-    function createShowingTable(data) {
-        //获取后台传过来的jsonData,并进行解析
-
-        //此处需要让其动态的生成一个table并填充数据
-        var tableStr = "";
-        var len = data.length;
-        for (var i = 0; i < len; i++) {
-            tableStr = tableStr + "<tr><td align='center'>" + data[i].number
-                + "</td>" + "<td align='center'>" + data[i].student_name + "</td>"
-                + "<td align='center'>" + data[i].course_name + "</td>"
-                + "<td align='center'>" + data[i].score + "</td></tr>";
         }
-        //将动态生成的table添加的事先隐藏的div中.
-        $("#dataTable").html(tableStr);
     }
-});
+})
+
+function selectAjax(){
+    reportCardVm.studyArr = [];
+    $.ajax({
+        url: "/src/select_score.php",
+        type: 'post',
+        dataType: 'json',
+        data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
+        success: function (data, status) {
+            console.log(reportCardVm.studyArr);
+            $.each(data,function(index, value){
+                reportCardVm.studyArr.push(value);
+            });
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}
+function insertAjax(){
+    console.log(reportCardVm.insertArr);
+    $.ajax({
+        url: "/src/insert_score.php",
+        type: 'post',
+        data: reportCardVm.insertArr,
+        success: function (data, status) {
+            selectAjax();
+        },
+        fail: function (err, status) {
+            console.log(err);
+        }
+    })
+}

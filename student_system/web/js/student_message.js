@@ -1,177 +1,168 @@
+// $(document).ready(function(){
+//     $.ajax({
+//         url: "/src/select_student.php",
+//         type: 'post',
+//         dataType: 'json',
+//         data:{"studentNumber": $("#studentNumber").val()},
+//         success: function (data, status) {
+//             console.log(data)
+//         },
+//         fail: function (err, status) {
+//             console.log(err)
+//         }
+//     })
+// });
 
-//初始化datatables
-var table = $('#table').DataTable({
-    "searching": false,
-    "serverSide": true,
-    "bProcessing": true,
-    "bPaginate": true, //翻页功能
-    "bLengthChange": true, //改变每页显示数据数量
-    "bFilter": true, //过滤功能
-    "bSort": false, //排序功能
-    "sPaginationType": "full_numbers",
-    "fnServerData": function (sSource, aoData, fnCallback) {
-        $.ajax({
-            type: "post",
-            url: "http://localhost/student_system/src/select_student.php",
-            data: {"studentNumber": $("#searchTitle").val()},
-            dataType:"json",
-            success: function (data) {
-                data.recordsTotal = data.page.recordsTotal;
-                data.recordsFiltered = data.page.recordsTotal;
-                fnCallback(data);
-            }
-        });
+var reportCardVm=new Vue({
+    el:'#reportCard',
+    data:{
+        selectNumber: {'studentNumber':''},
+        studyArr:[],//成绩花名册
+        insertArr:{},
+        addArr:{'number':'','name':'','sex':'','age':'','major':''},//新增的表单字段
+        nowEditCol:-1,//当前编辑的行
+        editStatus:false,//当前是否在编辑状态
+        searchTxt:''//搜索字段
     },
-    "oLanguage": {
-        "sLengthMenu": "每页显示 _MENU_ 条记录",
-        "sZeroRecords": "抱歉， 没有找到",
-        "sInfoEmpty": "没有数据",
-        "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-        "oPaginate": {
-            "sFirst": "首页",
-            "sPrevious": "前一页",
-            "sNext": "后一页",
-            "sLast": "尾页"
+    methods:{
+        //启动索引index数据编辑
+        startEdit:function(id){
+            this.nowEditCol=id;
         },
-        "sZeroRecords": "没有检索到数据",
-    },
-    "aoColumns": [
-        {"data": "name"},
-        {"data": "sex"},
-        {"data": "age"},
-        {"data": "major"}
-    ]
-});
-
-$("#search").click(function () {
-    table.ajax.reload();
-});
-///////////////////////////////////////////////////////////////////////////////
-//增加
-$("#add").click(function () {
-    layer.open({
-        type: 1,
-        skin: 'layui-layer-rim', //加上边框
-        area: ['420px', '240px'], //宽高
-        btn: ['确定'],
-        yes: function (index, layero) {
-            var json = {
-                "zy": $("#zhiy").val(),
-                "xm": $("#name").val(),
-                "xb": $("#sex").val(),
-                "fov_ck": $("#aihao").val()
+        //取消编辑状态
+        cancelEdit:function(){
+            this.nowEditCol=-1;
+        },
+        //启动索引index数据修改确认
+        sureEdit:function(id){
+            for(var i=0,len=this.studyArr.length;i<len;i++){
+                if(id === this.studyArr[i]['number'] ){
+                    this.editArr.sex= this.editArr.sex == "男" ? "1" : "0";
+                    updateAjax();
+                    break;
+                }
+            }
+            this.nowEditCol=-1;
+        },
+        //删除索引index数据
+        deleteStu:function(id){
+            for(var i=0,len=this.studyArr.length;i<len;i++){
+                if(id === this.studyArr[i]['number'] ){
+                    deleteAjax(this.studyArr[i]['number']);
+                    break;
+                }
+            }
+        },
+        //新增成绩
+        submitStu:function(){
+            var addArr={
+                'number':this.addArr.number,
+                'name':this.addArr.name,
+                'sex':(this.addArr.sex == '男') ? '1' : '0',
+                'age':this.addArr.age,
+                'major':this.addArr.major
             };
-            $.ajax({
-                type: "POST",
-                url: server + "user/addUser.do",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(json),
-                dataType: "json",
-                success: function (data) {
-                    if (data.success == true) {
-                        layer.msg(data.msg);
-                    } else if (data.success == false) {
-                        layer.msg(data.msg);
-                    }
+            this.insertArr = addArr;
+            //console.log(this.insertArr);
+            insertAjax();
+            this.resetStu();
+        },
+        //复位新增表单
+        resetStu:function(){
+            this.addArr={
+                'number':'',
+                'name':'',
+                'sex':'',
+                'age':'',
+                'major':''
+            }
+        }
+    },
+    computed:{
+
+        //存储当前编辑的对象
+        editArr:function(){
+            var editO={};
+            for(var i=0,len=this.studyArr.length;i<len;i++){
+                if(this.nowEditCol === this.studyArr[i]['number'] ){
+                    editO= this.studyArr[i];
+                    break;
+                }
+            }
+            return {
+                'number':editO.number,
+                'name':editO.name,
+                'sex':editO.sex ,
+                'age':editO.age,
+                'major':editO.major
+            }
+        }
+    }
+})
+
+function selectAjax(){
+    reportCardVm.studyArr = [];
+    $.ajax({
+        url: "/src/select_student.php",
+        type: 'post',
+        dataType: 'json',
+        data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
+        success: function (data, status) {
+            console.log(reportCardVm.studyArr);
+            $.each(data,function(index, value){
+                value.sex = (value.sex == 1) ? "男":"女";
+                if (value.status != false) {
+                    reportCardVm.studyArr.push(value);
                 }
             });
-            layer.close(index);
-            table.ajax.reload();
         },
-        content: '职业：' + '<input type="text" name="" id="zhiy" value=""/>' + '<br>姓名：'
-        + '<input type="text" name="" id="name" value=""/>' + '<br>性别：'
-        + '<input type="text" name="" id="sex" value=""/>' + '<br>爱好：'
-        + '<input type="text" name="" id="aihao" value=""/>'
-    });
-});
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}
+function insertAjax(){
+    console.log(reportCardVm.insertArr);
+    $.ajax({
+        url: "/src/insert_student.php",
+        type: 'post',
+        data: reportCardVm.insertArr,
+        success: function (data, status) {
+            selectAjax();
+        },
+        fail: function (err, status) {
+            console.log(err);
+        }
+    })
+}
 
-//选中一行触发
-$('#example tbody').on('click', 'tr', function () {
-    if ($(this).hasClass('selected')) {
-        $(this).removeClass('selected');
-        adatid = "";
-    }
-    else {
-        table.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-        adatid = table.row(this).data().guid;
-        adata = table.row(this).data().zy;
-        bdata = table.row(this).data().xm;
-        cdata = table.row(this).data().xb;
-        ddata = table.row(this).data().fov;
-    }
-});
-////////////////////////////////////////////////////////////////////////////////////////
-//修改
-$("#change").click(function () {
-    if (adatid === '') {
-        alert("请选中要修改的数据");
-    } else {
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-rim', //加上边框
-            area: ['420px', '240px'], //宽高
-            btn: ['确定'],
-            yes: function (index, layero) {
-                var json = {
-                    "guid": adatid,
-                    "zy": $("#cid").val(),
-                    "xm": $("#cname").val(),
-                    "xb": $("#csex").val(),
-                    "fov_ck": $("#cage").val()
-                };
-                $.ajax({
-                    type: "POST",
-                    url: server + "user/updateUser.do",
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(json),
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.success == true) {
-                            layer.msg(data.msg);
-                        } else if (data.success == false) {
-                            layer.msg(data.msg);
-                        }
-                    }
-                });
-                layer.close(index);
-                table.ajax.reload();
-            },
-            content: '职业：' + '<input type="text" name="" id="cid"/>' + '<br>姓名：'
-            + '<input type="text" name="" id="cname"/>' + '<br>性别：'
-            + '<input type="text" name="" id="csex"/>' + '<br>爱好：'
-            + '<input type="text" name="" id="cage"/>'
-        });
-    }
-    $("#cid").val(adata);
-    $("#cname").val(bdata);
-    $("#csex").val(cdata);
-    $("#cage").val(ddata);
-});
+function updateAjax(){
+    $.ajax({
+        url: "/src/update_student.php",
+        type: 'post',
+        data: reportCardVm.editArr,
+        success: function (data, status) {
+            console.log(reportCardVm.editArr);
+            selectAjax();
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}
 
-////////////////////////////////////////////////////////////////////////////////
-//删除
-$("#del").click(function () {
-    if (adatid === '') {
-        alert("请删除要修改的数据");
-    } else {
-        var json = {
-            "guid": adatid
-        };
-        $.ajax({
-            type: "POST",
-            url: server + "user/deleteUser.do",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(json),
-            dataType: "json",
-            success: function (data) {
-                if (data.success == true) {
-                    layer.msg(data.msg);
-                } else if (data.success == false) {
-                    layer.msg(data.msg);
-                }
-            }
-        });
-        table.ajax.reload();
-    }
-});
+function deleteAjax(number){
+    console.log(number);
+    $.ajax({
+        url: "/src/delete_student.php",
+        type: 'post',
+        data: {'number': number},
+        success: function (data, status) {
+            console.log(number);
+            selectAjax();
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}

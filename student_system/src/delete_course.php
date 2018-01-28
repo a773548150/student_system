@@ -8,7 +8,7 @@
 
 include_once("./operation_mysql.php");
 
-$number = $_POST('number');
+$number = $_POST['number'];
 
 $db = new DB();
 $res = $db->delete_course_message($number);

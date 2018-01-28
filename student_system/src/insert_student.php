@@ -7,11 +7,11 @@
  */
 include_once("./operation_mysql.php");
 
-$name = "王芳";
-$number = "1514080902230";
-$sex = "0";
-$age = "1997-08-12";
-$major = "计算机科学与技术";
+$name = $_POST['name'];
+$number = $_POST['number'];
+$sex = $_POST['sex'];
+$age = $_POST['age'];
+$major = $_POST['major'];
 
 $message = array(
     'number' => $number,

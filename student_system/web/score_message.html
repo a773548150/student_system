@@ -1,38 +1,56 @@
 <!DOCTYPE html>
+<meta name="robots" content="noindex">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>管理成绩信息</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/score_message.css" rel="stylesheet">
-    <title>Title</title>
 </head>
 <body>
 <h3>管理成绩信息</h3>
-<div class="form-inline" id="top_box">
-    <div class="form-group">
-        <label for="studentNumber">学号：</label>
-        <input type="text" class="form-control" id="studentNumber" name="studentNumber" placeholder="请输入学号">
+<div class="report_card" id="reportCard">
+    <div class="input-group input-group" id="selectStudentNumber">
+        <span class="input-group-addon" id="sizing-addon1">学号</span>
+        <input type="text" class="form-control" id="studentNumber" v-model="selectNumber.studentNumber" placeholder="请填入学号" aria-describedby="sizing-addon1">
+        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
     </div>
-    <button type="submit" class="btn btn-default" id="submit">
-        <span class="glyphicon glyphicon-search" aria-hidden="true">搜索</span>
-    </button>
+    <table class="table table-hover">
+        <caption>学生信息录入/处理</caption>
+        <tbody>
+        <tr>
+            <td width="170">学号:<input type="text" v-model="addArr.studentNumber" class="form-control"></td>
+            <td width="170">课程号:<input type="text" v-model="addArr.courseNumber" class="form-control"></td>
+            <td width="170">成绩:<input type="text" v-model="addArr.score" class="form-control"></td>
+            <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
+            <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-default" href="student.html" role="button">回到主页</a>
+    <table class="table table-hover table-striped">
+        <caption>成绩列表</caption>
+        <thead>
+        <th width="170">学号</th>
+        <th width="170">姓名</th>
+        <th width="170">课程名</th>
+        <th width="170">成绩</th>
+        </thead>
+        <tbody>
+        <tr v-for="item in studyArr">
+            <td><div class="content">{{item.number}}</div></td>
+            <td><div class="content">{{item.student_name}}</div></td>
+            <td><div class="content">{{item.course_name}}</div></td>
+            <td><div class="content">{{item.score}}</div></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
-<table id="table-javascript" class="table table-hover table-responsive ">
-    <thead>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">学号</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">姓名</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">课程名</div></th>
-    <th style="text-align: center; vertical-align: middle;"><div class="th-inner ">成绩</div></th>
-    </thead>
-    <tbody id="dataTable"></tbody>
-</table>
-
-
+<script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-table.js"></script>
-<script src="js/bootstrap-table-zh-CN.js"></script>
 <script src="js/score_message.js"></script>
 </body>
 </html>

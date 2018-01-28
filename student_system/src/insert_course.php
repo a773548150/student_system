@@ -7,10 +7,10 @@
  */
 include_once("./operation_mysql.php");
 
-$number = "A008";
-$name = "软件工程导论";
-$credit = "2.5";
-$start_time = "2018-03-12";
+$number = $_POST['number'];
+$name = $_POST['name'];
+$credit = $_POST['credit'];
+$start_time = $_POST['start_time'];
 
 $message = array(
     'number' => $number,

@@ -8,8 +8,8 @@
 
 include_once("./operation_mysql.php");
 
-$name = $_POST('name');
+$number = $_POST['number'];
 
 $db = new DB();
-$res = $db->delete_student_message($name);
+$res = $db->delete_student_message($number);
 printf("%s rows have been delete.", $res);
