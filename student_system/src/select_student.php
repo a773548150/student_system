@@ -8,8 +8,9 @@
 
 include_once("./operation_mysql.php");
 
-$message = $_POST['studentNumber'];
+$message = $_POST['studentMessage'];
 
 $db = new DB();
+$db->is_login();
 $res = $db->select_student($message);
 echo json_encode($res);

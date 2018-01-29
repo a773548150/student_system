@@ -19,5 +19,6 @@ $message = array(
 );
 
 $db = new DB();
+$db->is_login();
 $res = $db->insert_score($message);
 printf("%s rows have been insert.", $res);

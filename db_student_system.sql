@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : hiaocong
-Source Server Version : 50721
+Source Server         : localhost
+Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : db_student_system
 
 Target Server Type    : MYSQL
-Target Server Version : 50721
+Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-01-28 23:55:24
+Date: 2018-01-29 17:47:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `t_course` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='课程表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='课程表';
 
 -- ----------------------------
 -- Records of t_course
@@ -60,7 +60,7 @@ CREATE TABLE `t_manager` (
 -- ----------------------------
 -- Records of t_manager
 -- ----------------------------
-INSERT INTO `t_manager` VALUES ('1', 'admin', '555', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_manager` VALUES ('1', 'admin', '123', '0000-00-00 00:00:00', '2018-01-29 10:02:04');
 
 -- ----------------------------
 -- Table structure for t_score
@@ -108,7 +108,7 @@ CREATE TABLE `t_student` (
   `delete_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '删除时间',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='学生表';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 -- ----------------------------
 -- Records of t_student
@@ -121,12 +121,18 @@ INSERT INTO `t_student` VALUES ('15', '121', 'asd', '0', 'asd', 'asdr2', '2018-0
 INSERT INTO `t_student` VALUES ('16', '151408090421', '小刘', '0', '1998-10-07', '网络工程', '2018-01-28 20:25:25', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_student` VALUES ('17', '151408092314', '小红', '0', '1999-03-23', '计算机科学与技术', '2018-01-28 20:26:22', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_student` VALUES ('18', 'sd', 'aa', '0', '12', 'df', '2018-01-28 20:26:50', '2018-01-28 20:28:52', '2018-01-28 20:47:42', '0');
-INSERT INTO `t_student` VALUES ('19', '123', '3123', '0', '34124', 'af', '2018-01-28 20:31:27', '0000-00-00 00:00:00', '2018-01-28 20:47:42', '0');
+INSERT INTO `t_student` VALUES ('19', '123', '3123', '0', '34124', 'af', '2018-01-28 20:31:27', '0000-00-00 00:00:00', '2018-01-29 17:00:32', '0');
 INSERT INTO `t_student` VALUES ('20', 'rwer', 'df', '0', '12', 'fds', '2018-01-28 20:33:55', '0000-00-00 00:00:00', '2018-01-28 20:47:41', '0');
 INSERT INTO `t_student` VALUES ('21', '12', '12', '0', 'asdf', 'ads', '2018-01-28 20:34:40', '0000-00-00 00:00:00', '2018-01-28 20:47:40', '0');
 INSERT INTO `t_student` VALUES ('22', '14343', '13', '0', '12', 'fasdf', '2018-01-28 20:35:53', '0000-00-00 00:00:00', '2018-01-28 20:47:39', '0');
 INSERT INTO `t_student` VALUES ('23', '12123', 'fsdfsdf', '0', 'fsd', 'sdfsd', '2018-01-28 20:37:31', '0000-00-00 00:00:00', '2018-01-28 20:47:34', '0');
 INSERT INTO `t_student` VALUES ('24', '15434', 'sss', '0', 'dfsdf', '234', '2018-01-28 20:49:56', '2018-01-28 21:49:52', '2018-01-28 21:50:23', '0');
+INSERT INTO `t_student` VALUES ('25', '151408092315', '小明', '1', '1994-10-05', '网络工程', '2018-01-29 10:21:10', '2018-01-29 10:56:11', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('26', '123', '小刚', '1', '32289', '美术', '2018-01-29 15:54:22', '0000-00-00 00:00:00', '2018-01-29 17:00:32', '0');
+INSERT INTO `t_student` VALUES ('27', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:05:27', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
+INSERT INTO `t_student` VALUES ('28', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:45:19', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
+INSERT INTO `t_student` VALUES ('29', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:58:45', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
+INSERT INTO `t_student` VALUES ('30', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:59:37', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
 
 -- ----------------------------
 -- View structure for user

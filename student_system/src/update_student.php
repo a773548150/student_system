@@ -30,5 +30,6 @@ $message = array(
 );
 var_dump($message);
 $db = new DB();
+$db->is_login();
 $res = $db->update_student_message($message, $number);
 printf("%s rows have been update.", $res);

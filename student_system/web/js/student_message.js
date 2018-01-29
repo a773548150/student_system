@@ -16,7 +16,7 @@
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
-        selectNumber: {'studentNumber':''},
+        studentMessage: {'studentMessage':''},
         studyArr:[],//成绩花名册
         insertArr:{},
         addArr:{'number':'','name':'','sex':'','age':'','major':''},//新增的表单字段
@@ -106,12 +106,13 @@ function selectAjax(){
         url: "/src/select_student.php",
         type: 'post',
         dataType: 'json',
-        data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
+        data:{"studentMessage": reportCardVm.studentMessage.studentMessage},
         success: function (data, status) {
             console.log(reportCardVm.studyArr);
             $.each(data,function(index, value){
                 value.sex = (value.sex == 1) ? "男":"女";
                 if (value.status != false) {
+                    value.age = toAge(value.age);
                     reportCardVm.studyArr.push(value);
                 }
             });

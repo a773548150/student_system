@@ -21,5 +21,6 @@ $message = array(
 );
 
 $db = new DB();
+$db->is_login();
 $res = $db->update_course_message($message);
 printf("%s rows have been update.", $res);

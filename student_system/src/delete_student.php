@@ -11,5 +11,6 @@ include_once("./operation_mysql.php");
 $number = $_POST['number'];
 
 $db = new DB();
+$db->is_login();
 $res = $db->delete_student_message($number);
 printf("%s rows have been delete.", $res);

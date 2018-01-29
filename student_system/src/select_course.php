@@ -11,5 +11,6 @@ include_once("./operation_mysql.php");
 $message = $_POST['courseMessage'];
 
 $db = new DB();
+$db->is_login();
 $res = $db->select_course($message);
 echo json_encode($res);

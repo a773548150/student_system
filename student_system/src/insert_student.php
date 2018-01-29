@@ -22,5 +22,6 @@ $message = array(
 );
 
 $db = new DB();
+$db->is_login();
 $res = $db->insert_student_message($message);
 printf("%s rows have been insert.", $res);

@@ -12,13 +12,14 @@ $username = $_POST['username'];
 $oldPassword = $_POST['oldPassword'];
 $newPassword = $_POST['newPassword'];
 $db = new DB();
+$db->is_login();
 $res = $db->update_manager_password($username, $oldPassword, $newPassword);
 if ($res === 0) {
-    printf("账号或密码错误");
+    echo "0"; // 账号或密码错误
 } else if ($res === 1) {
-    printf("修改密码失败");
+    echo "1"; // 修改密码失败
 } else if ($res === 2) {
-    printf("修改密码成功");
+    echo "2"; // 修改密码成功
 } else {
-    printf("未知错误");
+    echo "3"; // 未知错误
 }

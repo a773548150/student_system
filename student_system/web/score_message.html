@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<meta name="robots" content="noindex">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,13 +6,13 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/score_message.css" rel="stylesheet">
 </head>
-<body>
+<body onkeydown="keySearch();">
 <h3>管理成绩信息</h3>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectStudentNumber">
         <span class="input-group-addon" id="sizing-addon1">学号</span>
         <input type="text" class="form-control" id="studentNumber" v-model="selectNumber.studentNumber" placeholder="请填入学号" aria-describedby="sizing-addon1">
-        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align">
+        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </div>
@@ -29,7 +28,7 @@
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default" href="student.html" role="button">回到主页</a>
+    <a class="btn btn-default btn-primary" href="/index.html" role="button">回到主页</a>
     <table class="table table-hover table-striped">
         <caption>成绩列表</caption>
         <thead>
@@ -51,6 +50,7 @@
 <script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="common/common.js"></script>
 <script src="js/score_message.js"></script>
 </body>
 </html>
