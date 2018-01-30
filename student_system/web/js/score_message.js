@@ -24,15 +24,23 @@ var reportCardVm=new Vue({
     methods:{
         //新增成绩
         submitStu:function(){
-            var addArr={
-                'studentNumber':this.addArr.studentNumber,
-                'courseNumber':this.addArr.courseNumber,
-                'score':this.addArr.score
-            };
-            this.insertArr = addArr;
-            //console.log(this.insertArr);
-            insertAjax();
-            this.resetStu();
+            if (this.addArr.studentNumber == '' || this.addArr.courseNumber == '' || this.addArr.score == '') {
+                alert("输入不能为空！");
+            } else if(this.addArr.studentNumber.length < 13){
+                alert("学号不能少于13位！");
+            } else if (parseFloat(this.addArr.score) > 100 || parseFloat(this.addArr.score) < 0) {
+                alert("成绩按规范输入,如88.5");
+            } else{
+                var addArr={
+                    'studentNumber':this.addArr.studentNumber,
+                    'courseNumber':this.addArr.courseNumber,
+                    'score':this.addArr.score
+                };
+                this.insertArr = addArr;
+                //console.log(this.insertArr);
+                insertAjax();
+                this.resetStu();
+            }
         },
         //复位新增表单
         resetStu:function(){
@@ -47,6 +55,7 @@ var reportCardVm=new Vue({
 
 function selectAjax(){
     reportCardVm.studyArr = [];
+    $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
         url: "/src/select_score.php",
         type: 'post',
@@ -57,6 +66,7 @@ function selectAjax(){
             $.each(data,function(index, value){
                 reportCardVm.studyArr.push(value);
             });
+            $.bootstrapLoading.end();
         },
         fail: function (err, status) {
             console.log(err)
@@ -65,11 +75,13 @@ function selectAjax(){
 }
 function insertAjax(){
     console.log(reportCardVm.insertArr);
+    $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
         url: "/src/insert_score.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {

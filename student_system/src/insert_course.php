@@ -5,7 +5,8 @@
  * Date: 2018/1/25
  * Time: 9:52
  */
-include_once("./operation_mysql.php");
+
+require("./operation_mysql.php");
 
 $number = $_POST['number'];
 $name = $_POST['name'];
@@ -19,6 +20,13 @@ $message = array(
     'start_time' => $start_time
 );
 
-$db = new DB();
-$res = $db->insert_course_message($message);
-printf("%s rows have been insert.", $res);
+if ($name == "" || $number == "" || $credit == ""|| $start_time == ""|| $major == "") {
+    echo "Input can't be empty";
+} else if (strlen($number) != 4) {
+    echo "Number is wrong";
+} else {
+    $db = new DB();
+    $db->is_login_manager();
+    $res = $db->insert_course_message($message);
+    printf("%s rows have been insert.", $res);
+}

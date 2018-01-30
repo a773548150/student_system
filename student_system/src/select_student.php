@@ -6,10 +6,11 @@
  * Time: 21:24
  */
 
-include_once("./operation_mysql.php");
+require("./operation_mysql.php");
 
-$message = $_POST['studentNumber'];
+$message = trim($_POST['studentMessage']);
 
 $db = new DB();
+$db->is_login_manager();
 $res = $db->select_student($message);
 echo json_encode($res);

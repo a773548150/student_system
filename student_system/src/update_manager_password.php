@@ -6,19 +6,24 @@
  * Time: 9:10
  */
 
-include_once("./operation_mysql.php");
+require("./operation_mysql.php");
 
 $username = $_POST['username'];
-$oldPassword = $_POST['oldPassword'];
-$newPassword = $_POST['newPassword'];
-$db = new DB();
-$res = $db->update_manager_password($username, $oldPassword, $newPassword);
-if ($res === 0) {
-    printf("账号或密码错误");
-} else if ($res === 1) {
-    printf("修改密码失败");
-} else if ($res === 2) {
-    printf("修改密码成功");
+$oldPassword = md5($_POST['oldPassword']);
+$newPassword = md5($_POST['newPassword']);
+
+if ($username == "" || $oldPassword == "" || $newPassword == "") {
+    echo "Input can't be empty";
 } else {
-    printf("未知错误");
+    $db = new DB();
+    $res = $db->update_manager_password($username, $oldPassword, $newPassword);
+    if ($res === 0) {
+        echo "0"; // 账号或密码错误
+    } else if ($res === 1) {
+        echo "1"; // 修改密码失败
+    } else if ($res === 2) {
+        echo "2"; // 修改密码成功
+    } else {
+        echo "3"; // 未知错误
+    }
 }

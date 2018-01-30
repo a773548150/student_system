@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/web/css/fileinput.min.css" rel="stylesheet">
+    <link href="/web/css/entering_excel.css" rel="stylesheet">
+    <title>录入excel表数据</title>
+</head>
+<body>
+<h3 class="modal-title">请选择Excel文件(后缀为.xls)</h3>
+<form enctype="multipart/form-data" id="enteringExcelForm" action="/src/entering_excel.php" method="post">
+    <input id="excelFile"  type="file" name="myfile" placeholder="请选择Excel表" data-show-upload="false" data-show-caption="true">
+    <br>
+    <button type="submit" class="btn btn-primary">确定</button>
+    <button type="reset" class="btn btn-default" onclick="backToStudentPage()">返回</button>
+</form>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/fileinput.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.3.5/js/locales/zh.min.js"></script>
+<script src="js/entering_excel.js"></script>
+</body>
+</html>

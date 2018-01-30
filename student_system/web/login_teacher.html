@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login_teacher.css" rel="stylesheet">
+    <title>teacher login page</title>
+</head>
+<body onkeydown="keyLogin();">
+<ul class="nav nav-tabs nav-justified" id="nav">
+    <li role="presentation"><a href="login.html">管理员登录</a></li>
+    <li role="presentation" class="active"><a href="login_teacher.html">老师登录</a></li>
+</ul>
+<div id="page">
+    <div class="form-group">
+        <label for="inputUsername">用户名：</label>
+        <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username" />
+    </div>
+    <div class="form-group">
+        <label for="inputPssword">密码：</label>
+        <input type="password" class="form-control" id="inputPssword" name="password" placeholder="Password" />
+    </div>
+    <button type="submit" class="btn btn-default" onclick="login()" id="submit">登 录</button>
+    <a class="btn btn-default" href="modify_teacher_password.html" role="button" id="linkToModify">修改密码</a>
+</div>
+<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/login_teacher.js"></script>
+</body>
+</html>

@@ -6,9 +6,12 @@
     <link href="css/login.css" rel="stylesheet">
     <title>Manager login page</title>
 </head>
-<body>
-    <form action="../src/login_manager.php" method="post">
-        <h1>管理员登录</h1>
+<body onkeydown="keyLogin();">
+    <ul class="nav nav-tabs nav-justified" id="nav">
+        <li role="presentation" class="active"><a href="login.html">管理员登录</a></li>
+        <li role="presentation"><a href="login_teacher.html">老师登录</a></li>
+    </ul>
+    <div id="page">
         <div class="form-group">
             <label for="inputUsername">用户名：</label>
             <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username" />
@@ -19,9 +22,10 @@
         </div>
         <button type="submit" class="btn btn-default" onclick="login()" id="submit">登 录</button>
         <a class="btn btn-default" href="modify_manager_password.html" role="button" id="linkToModify">修改密码</a>
-    </form>
+    </div>
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <script src="js/login.js"></script>
 </body>
 </html>

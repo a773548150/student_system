@@ -1,24 +1,10 @@
-// $(document).ready(function(){
-//     $.ajax({
-//         url: "/src/select_student.php",
-//         type: 'post',
-//         dataType: 'json',
-//         data:{"studentNumber": $("#studentNumber").val()},
-//         success: function (data, status) {
-//             console.log(data)
-//         },
-//         fail: function (err, status) {
-//             console.log(err)
-//         }
-//     })
-// });
-
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
-        selectNumber: {'studentNumber':''},
-        studyArr:[],//成绩花名册
+        studentMessage: {'studentMessage':''},
+        studyArr: [],//成绩花名册
         insertArr:{},
+        storeAge: [],
         addArr:{'number':'','name':'','sex':'','age':'','major':''},//新增的表单字段
         nowEditCol:-1,//当前编辑的行
         editStatus:false,//当前是否在编辑状态
@@ -31,6 +17,12 @@ var reportCardVm=new Vue({
         },
         //取消编辑状态
         cancelEdit:function(){
+            // 把年龄转换为y-m-d格式
+            for(var i=0,len=this.studyArr.length;i<len;i++){
+                if(this.nowEditCol === this.studyArr[i]['number'] ) {
+                    this.studyArr[i].age = toAge(this.editArr.age);
+                }
+            }
             this.nowEditCol=-1;
         },
         //启动索引index数据修改确认
@@ -38,7 +30,15 @@ var reportCardVm=new Vue({
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(id === this.studyArr[i]['number'] ){
                     this.editArr.sex= this.editArr.sex == "男" ? "1" : "0";
-                    updateAjax();
+                    if (this.editArr.number == '' || this.editArr.name == '' || this.editArr.sex == '' || this.editArr.age == '' || this.editArr.major == '') {
+                        alert("输入不能为空！");
+                    } else if (this.editArr.number.length < 13) {
+                        alert("学号不能少于13位！");
+                    } else if (this.editArr.age.length < 10) {
+                        alert("年龄按规范输入，如1999-10-01");
+                    } else {
+                        updateAjax();
+                    }
                     break;
                 }
             }
@@ -55,17 +55,25 @@ var reportCardVm=new Vue({
         },
         //新增成绩
         submitStu:function(){
-            var addArr={
-                'number':this.addArr.number,
-                'name':this.addArr.name,
-                'sex':(this.addArr.sex == '男') ? '1' : '0',
-                'age':this.addArr.age,
-                'major':this.addArr.major
-            };
-            this.insertArr = addArr;
-            //console.log(this.insertArr);
-            insertAjax();
-            this.resetStu();
+            if (this.addArr.number == '' || this.addArr.name == '' || this.addArr.sex == '' || this.addArr.age == '' || this.addArr.major == '') {
+                alert("输入不能为空！");
+            } else if (this.addArr.number.length < 13) {
+                alert("学号不能少于13位！");
+            } else if (this.addArr.age.length < 10) {
+                alert("年龄按规范输入，如1999-10-01");
+            } else {
+                var addArr={
+                    'number':this.addArr.number,
+                    'name':this.addArr.name,
+                    'sex':(this.addArr.sex == '男' || this.addArr.sex == '1') ? '1' : '0',
+                    'age':this.addArr.age,
+                    'major':this.addArr.major
+                };
+                this.insertArr = addArr;
+                //console.log(this.insertArr);
+                insertAjax();
+                this.resetStu();
+            }
         },
         //复位新增表单
         resetStu:function(){
@@ -85,7 +93,8 @@ var reportCardVm=new Vue({
             var editO={};
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(this.nowEditCol === this.studyArr[i]['number'] ){
-                    editO= this.studyArr[i];
+                    editO = this.studyArr[i];
+                    editO.age = this.storeAge[i];
                     break;
                 }
             }
@@ -102,19 +111,23 @@ var reportCardVm=new Vue({
 
 function selectAjax(){
     reportCardVm.studyArr = [];
+    $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
         url: "/src/select_student.php",
         type: 'post',
         dataType: 'json',
-        data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
+        data:{"studentMessage": reportCardVm.studentMessage.studentMessage},
         success: function (data, status) {
             console.log(reportCardVm.studyArr);
             $.each(data,function(index, value){
-                value.sex = (value.sex == 1) ? "男":"女";
+                value.sex = (value.sex == 1 || value.sex == "男") ? "男":"女";
                 if (value.status != false) {
+                    reportCardVm.storeAge.push(value.age);
+                    value.age = toAge(value.age);
                     reportCardVm.studyArr.push(value);
                 }
             });
+            $.bootstrapLoading.end();
         },
         fail: function (err, status) {
             console.log(err)
@@ -123,11 +136,13 @@ function selectAjax(){
 }
 function insertAjax(){
     console.log(reportCardVm.insertArr);
+    $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
         url: "/src/insert_student.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {
@@ -137,12 +152,14 @@ function insertAjax(){
 }
 
 function updateAjax(){
+    $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
         url: "/src/update_student.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
             console.log(reportCardVm.editArr);
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {
@@ -152,6 +169,7 @@ function updateAjax(){
 }
 
 function deleteAjax(number){
+    $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     console.log(number);
     $.ajax({
         url: "/src/delete_student.php",
@@ -159,6 +177,7 @@ function deleteAjax(number){
         data: {'number': number},
         success: function (data, status) {
             console.log(number);
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {

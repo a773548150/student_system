@@ -1,39 +1,49 @@
 <!DOCTYPE html>
-<meta name="robots" content="noindex">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue成绩单</title>
+    <title>管理学生信息</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/student_message.css" rel="stylesheet">
 </head>
-<body>
-<h3>管理学生信息</h3>
+<body onkeydown="keySearch();">
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/index.html">主页</a></li>
+    <li role="presentation" class="active"><a href="#">学生管理页</a></li>
+    <li role="presentation"><a href="course_message.html">课程管理页</a></li>
+    <li role="presentation"><a href="score_message.html">成绩管理页</a></li>
+</ul>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectStudentNumber">
-        <span class="input-group-addon" id="sizing-addon1">学号</span>
-        <input type="text" class="form-control" id="studentNumber" v-model="selectNumber.studentNumber" placeholder="请填入学号" aria-describedby="sizing-addon1">
-        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align">
+        <span class="input-group-addon" id="sizing-addon1">学号/姓名</span>
+        <input type="text" class="form-control" id="studentNumber" maxlength="13" v-model="studentMessage.studentMessage" placeholder="请填入学号/姓名" aria-describedby="sizing-addon1">
+        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </div>
+
     <table class="table table-hover">
-        <caption>学生信息录入/处理</caption>
+        <caption>学生信息录入/处理 <span class="label label-warning">填写/编辑年龄时请输入出身年月日，如1999-10-01</span></caption>
         <tbody>
         <tr>
-            <td width="170">学号:<input type="text" v-model="addArr.number" class="form-control"></td>
-            <td width="170">姓名:<input type="text" v-model="addArr.name" class="form-control"></td>
-            <td width="170">性别:<input type="text" v-model="addArr.sex" class="form-control"></td>
-            <td width="170">年龄:<input type="text" v-model="addArr.age" class="form-control"></td>
-            <td width="170">专业:<input type="text" v-model="addArr.major" class="form-control"></td>
+            <td width="170">学号:<input type="number" v-model="addArr.number" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
+            <td width="170">姓名:<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
+            <td width="170">性别:
+                <select class="form-control" v-model="addArr.sex">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </td>
+            <td width="170">年龄:<input type="text" maxlength="10" v-model="addArr.age" class="form-control"></td>
+            <td width="170">专业:<input type="text" maxlength="20" v-model="addArr.major" class="form-control"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
+            <td><a class="btn btn-default btn-info" id="enteringExcel" href="entering_excel.html" role="button">导入excel表</a></td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default" href="student.html" role="button">回到主页</a>
     <table class="table table-hover table-striped">
-        <caption>成绩列表</caption>
+        <caption>学生列表</caption>
         <thead>
         <th width="170">学号</th>
         <th width="170">姓名</th>
@@ -44,17 +54,25 @@
         </thead>
         <tbody>
         <tr v-for="item in studyArr">
-            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.name}}<input class="form-control" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.sex}}<input class="form-control" v-model="editArr.sex" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.age}}<input class="form-control" v-model="editArr.age" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.major}}<input class="form-control" v-model="editArr.major" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.number}}<input class="form-control" disabled="disabled" v-model="editArr.number" type="number" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td>
+                <div class="content">
+                    {{item.sex}}
+                    <select class="form-control" v-model="editArr.sex" v-if="item.number==nowEditCol">
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+                </div>
+            </td>
+            <td><div class="content">{{item.age}}<input class="form-control" maxlength="10" v-model="editArr.age" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.major}}<input class="form-control" maxlength="20" v-model="editArr.major" type="text" v-if="item.number==nowEditCol"></div></td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="sureEdit(item.number)" v-if="item.number==nowEditCol">确认</a>
             </td>
-            <td><a class="btn btn-default" href="javascript:void(0);" v-on:click="deleteStu(item.number)">删除</a></td>
+            <td><a class="btn btn-default btn-danger" href="javascript:void(0);" v-on:click="deleteStu(item.number)">删除</a></td>
         </tr>
         </tbody>
     </table>
@@ -62,6 +80,7 @@
 <script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="common/common.js"></script>
 <script src="js/student_message.js" type="text/javascript"></script>
 </body>
 </html>

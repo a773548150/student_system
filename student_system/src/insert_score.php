@@ -6,7 +6,7 @@
  * Time: 10:52
  */
 
-include_once("./operation_mysql.php");
+require("./operation_mysql.php");
 
 $studentNumber = $_POST['studentNumber'];
 $courseNumber = $_POST['courseNumber'];
@@ -18,6 +18,15 @@ $message = array(
     'score' => $score
 );
 
-$db = new DB();
-$res = $db->insert_score($message);
-printf("%s rows have been insert.", $res);
+if ($studentNumber == "" || $courseNumber == "" || $score == "") {
+    echo "Input can't be empty";
+} else if (strlen($studentNumber) != 13) {
+    echo "StudentNumber is wrong";
+} else if (strlen($courseNumber) != 4) {
+    echo "CourseNumber is wrong";
+} else {
+    $db = new DB();
+    $db->is_login_manager();
+    $res = $db->insert_score($message);
+    printf("%s rows have been insert.", $res);
+}

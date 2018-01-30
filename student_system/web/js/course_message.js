@@ -1,4 +1,4 @@
-var reportCardVm=new Vue({
+var reportCardVm = new Vue({
     el:'#reportCard',
     data:{
         courseMessage: {'courseMessage':''},
@@ -22,7 +22,15 @@ var reportCardVm=new Vue({
         sureEdit:function(id){
             for(var i=0,len=this.courseArr.length;i<len;i++){
                 if(id === this.courseArr[i]['number'] ){
-                    updateAjax();
+                    if (this.editArr.number == '' || this.editArr.name == '' || this.editArr.credit == '' || this.editArr.start_time == '') {
+                        alert("输入不能为空！");
+                    } else if(this.editArr.credit.toString().indexOf(".") < 0 ||this.editArr.credit.toString().split(".")[1].length != 1){
+                        alert("学分按规范输入，如3.5");
+                    } else if (this.editArr.start_time.length < 10) {
+                        alert("开课时间输入过短！");
+                    } else {
+                        updateAjax();
+                    }
                     break;
                 }
             }
@@ -39,16 +47,24 @@ var reportCardVm=new Vue({
         },
         //新增成绩
         submitStu:function(){
-            var addArr={
-                'number':this.addArr.number,
-                'name':this.addArr.name,
-                'credit':this.addArr.credit,
-                'start_time':this.addArr.start_time
-            };
-            this.insertArr = addArr;
-            //console.log(this.insertArr);
-            insertAjax();
-            this.resetStu();
+            if (this.addArr.number == '' || this.addArr.name == '' || this.addArr.credit == '' || this.addArr.start_time == '') {
+                alert("输入不能为空！");
+            } else if(this.addArr.credit.toString().indexOf(".") < 0 || this.addArr.credit.toString().split(".")[1].length != 1){
+                alert("学分按规范输入，如3.5");
+            } else if (this.addArr.start_time.length < 10) {
+                alert("开课时间输入过短！");
+            } else {
+                var addArr={
+                    'number':this.addArr.number,
+                    'name':this.addArr.name,
+                    'credit':this.addArr.credit,
+                    'start_time':this.addArr.start_time
+                };
+                this.insertArr = addArr;
+                //console.log(this.insertArr);
+                insertAjax();
+                this.resetStu();
+            }
         },
         //复位新增表单
         resetStu:function(){
@@ -84,6 +100,7 @@ var reportCardVm=new Vue({
 
 function selectAjax(){
     reportCardVm.courseArr = [];
+    $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
         url: "/src/select_course.php",
         type: 'post',
@@ -96,6 +113,7 @@ function selectAjax(){
                     reportCardVm.courseArr.push(value);
                 }
             });
+            $.bootstrapLoading.end();
         },
         fail: function (err, status) {
             console.log(err)
@@ -104,11 +122,13 @@ function selectAjax(){
 }
 function insertAjax(){
     console.log(reportCardVm.insertArr);
+    $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
         url: "/src/insert_course.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {
@@ -118,12 +138,14 @@ function insertAjax(){
 }
 
 function updateAjax(){
+    $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
         url: "/src/update_course.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
             console.log(reportCardVm.editArr);
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {
@@ -134,12 +156,14 @@ function updateAjax(){
 
 function deleteAjax(number){
     console.log(number);
+    $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     $.ajax({
         url: "/src/delete_course.php",
         type: 'post',
         data: {'number': number},
         success: function (data, status) {
             console.log(number);
+            $.bootstrapLoading.end();
             selectAjax();
         },
         fail: function (err, status) {
