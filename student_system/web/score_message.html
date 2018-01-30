@@ -7,11 +7,16 @@
     <link href="css/score_message.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
-<h3>管理成绩信息</h3>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/index.html">主页</a></li>
+    <li role="presentation"><a href="student_message.html">学生管理页</a></li>
+    <li role="presentation"><a href="course_message.html">课程管理页</a></li>
+    <li role="presentation" class="active"><a href="#">成绩管理页</a></li>
+</ul>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectStudentNumber">
         <span class="input-group-addon" id="sizing-addon1">学号</span>
-        <input type="text" class="form-control" id="studentNumber" v-model="selectNumber.studentNumber" placeholder="请填入学号" aria-describedby="sizing-addon1">
+        <input type="number" class="form-control" id="studentNumber" v-model="selectNumber.studentNumber" placeholder="请填入学号" aria-describedby="sizing-addon1" oninput="if(value.length>13)value=value.slice(0,13)">
         <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
@@ -20,15 +25,14 @@
         <caption>学生信息录入/处理</caption>
         <tbody>
         <tr>
-            <td width="170">学号:<input type="text" v-model="addArr.studentNumber" class="form-control"></td>
-            <td width="170">课程号:<input type="text" v-model="addArr.courseNumber" class="form-control"></td>
-            <td width="170">成绩:<input type="text" v-model="addArr.score" class="form-control"></td>
+            <td width="170">学号:<input type="number" v-model="addArr.studentNumber" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
+            <td width="170">课程号:<input type="text" maxlength="4" v-model="addArr.courseNumber" class="form-control"></td>
+            <td width="170">成绩:<input type="text" maxlength="6" v-model="addArr.score" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default btn-primary" href="/index.html" role="button">回到主页</a>
     <table class="table table-hover table-striped">
         <caption>成绩列表</caption>
         <thead>

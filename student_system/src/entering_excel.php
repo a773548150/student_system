@@ -6,7 +6,8 @@
  * Time: 11:16
  */
 
-include_once("./operation_mysql.php");
+require("./operation_mysql.php");
 $db = new DB();
+$db->is_login_manager();
 //调用
 $db->upExecel();

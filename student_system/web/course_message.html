@@ -7,11 +7,16 @@
     <link href="css/course_message.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
-<h3>管理课程信息</h3>
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="/index.html">主页</a></li>
+    <li role="presentation"><a href="student_message.html">学生管理页</a></li>
+    <li role="presentation" class="active"><a href="#">课程管理页</a></li>
+    <li role="presentation"><a href="score_message.html">成绩管理页</a></li>
+</ul>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectCourseNumber">
-        <span class="input-group-addon" id="sizing-addon1">课程号</span>
-        <input type="text" class="form-control" id="courseNumber" v-model="courseMessage.courseMessage" placeholder="请填入课程号/课程名" aria-describedby="sizing-addon1">
+        <span class="input-group-addon" id="sizing-addon1">课程号/课程名</span>
+        <input type="text" class="form-control" maxlength="20" id="courseNumber" v-model="courseMessage.courseMessage" placeholder="请填入课程号/课程名" aria-describedby="sizing-addon1">
         <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
@@ -20,16 +25,15 @@
         <caption>学生信息录入/处理</caption>
         <tbody>
         <tr>
-            <td width="170">课程号:<input type="text" v-model="addArr.number" class="form-control"></td>
-            <td width="170">课程名:<input type="text" v-model="addArr.name" class="form-control"></td>
-            <td width="170">学分:<input type="text" v-model="addArr.credit" class="form-control"></td>
-            <td width="170">开课时间:<input type="text" v-model="addArr.start_time" class="form-control"></td>
+            <td width="170">课程号:<input type="text" maxlength="4" v-model="addArr.number" class="form-control" onKeyup="value=value.replace(/[\W]/ig, '')"></td>
+            <td width="170">课程名:<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
+            <td width="170">学分:<input type="text" maxlength="5" v-model="addArr.credit" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
+            <td width="170">开课时间:<input type="text" maxlength="21" v-model="addArr.start_time" class="form-control"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-default btn-primary" href="/index.html" role="button">回到主页</a>
     <table class="table table-hover table-striped">
         <caption>课程列表</caption>
         <thead>
@@ -41,10 +45,10 @@
         </thead>
         <tbody>
         <tr v-for="item in courseArr">
-            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.name}}<input class="form-control" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.credit}}<input class="form-control" v-model="editArr.credit" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.start_time}}<input class="form-control" v-model="editArr.start_time" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.number}}<input class="form-control" maxlength="4" v-model="editArr.number" type="text" v-if="item.number==nowEditCol" onKeyup="value=value.replace(/[\W]/ig, '')"></div></td>
+            <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.credit}}<input class="form-control" maxlength="5" v-model="editArr.credit" type="text" v-if="item.number==nowEditCol" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></div></td>
+            <td><div class="content">{{item.start_time}}<input class="form-control" maxlength="21" v-model="editArr.start_time" type="text" v-if="item.number==nowEditCol"></div></td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>

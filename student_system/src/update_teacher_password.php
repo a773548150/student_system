@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2018/1/26
- * Time: 9:10
+ * Date: 2018/1/30
+ * Time: 10:09
  */
 
 require("./operation_mysql.php");
@@ -16,7 +16,7 @@ if ($username == "" || $oldPassword == "" || $newPassword == "") {
     echo "Input can't be empty";
 } else {
     $db = new DB();
-    $res = $db->update_manager_password($username, $oldPassword, $newPassword);
+    $res = $db->update_teacher_password($username, $oldPassword, $newPassword);
     if ($res === 0) {
         echo "0"; // 账号或密码错误
     } else if ($res === 1) {

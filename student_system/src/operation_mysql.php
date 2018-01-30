@@ -50,11 +50,33 @@ class DB {
         }
     }
 
-    // 判断是否登录，已经登录返回true，未登录返回unlogin
-    public function is_login() {
+    // 登录老师账号，成功返回true，失败返回false
+    public function login_teacher($username, $password) {
+        $query = "select * from t_teacher where username = '{$username}' and password = '{$password}'";
+        $res = $this->db_query($query);
+        if (mysqli_num_rows($res) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 判断是否登录管理员，已经登录返回true，未登录返回unlogin
+    public function is_login_manager() {
         session_start();
         if (! isset($_SESSION['username'])) {
-            echo "unlogin";
+            echo "unloginManager";
+            exit();
+        } else {
+            return true;
+        }
+    }
+
+    // 判断是否登录老师，已经登录返回true，未登录返回unlogin
+    public function is_login_teacher() {
+        session_start();
+        if (! isset($_SESSION['teacherName'])) {
+            echo "unloginTeacher";
             exit();
         } else {
             return true;
@@ -67,6 +89,25 @@ class DB {
         $res = $this->db_query($query1);
         if (mysqli_num_rows($res) > 0) {
             $query2 = "update t_manager set password = '{$newPassword}', update_time = '{$this->currentTime}' where username = '{$username}'";
+            $this->db_query($query2);
+            // 修改密码成功返回2，失败返回1
+            if (mysqli_affected_rows($this->mysqli) > 0) {
+                return 2;
+            } else {
+                return 1;
+            }
+        } else {
+            // 登录失败返回0
+            return 0;
+        }
+    }
+
+    // 修改老师密码，修改完自动登录
+    public function update_teacher_password($username, $oldPassword, $newPassword) {
+        $query1 = "select * from t_teacher where username = '{$username}' and password = '{$oldPassword}'";
+        $res = $this->db_query($query1);
+        if (mysqli_num_rows($res) > 0) {
+            $query2 = "update t_teacher set password = '{$newPassword}', update_time = '{$this->currentTime}' where username = '{$username}'";
             $this->db_query($query2);
             // 修改密码成功返回2，失败返回1
             if (mysqli_affected_rows($this->mysqli) > 0) {
@@ -182,7 +223,7 @@ class DB {
                          select t_student.number, t_student.name as student_name, t_course.name as course_name,  score from t_student 
                          left outer join t_score on t_student.id=t_score.student_id  
                          left outer join t_course on t_course.id=t_score.course_id 
-                         where t_student.status > 0 and t_course.status > 0
+                         where t_student.number like '%{$message}%' and t_student.status > 0 and t_course.status > 0
                          order by t_student.number;";
         $this->db_query($queryTmp);
         $query = "select * from tmp_table;";

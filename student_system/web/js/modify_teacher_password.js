@@ -1,13 +1,12 @@
-function modifyManagerPassword(event) {
+function modifyTeacherPassword(event) {
     var username = $("#inputUsername").val()
     if ($("#inputUsername").val() == "" || $("#inputOldPssword").val() == "" || $("#inputNewPssword").val() == ""){
         alert("输入不能为空，请重新输入");
         var event = event || window.event;
         event.preventDefault();
     } else {
-        $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
         $.ajax({
-            url: "/src/update_manager_password.php",
+            url: "/src/update_teacher_password.php",
             type: 'post',
             dataType: 'json',
             data:{
@@ -17,7 +16,6 @@ function modifyManagerPassword(event) {
             },
             success: function (data, status) {
                 console.log(data);
-                $.bootstrapLoading.end();
                 if (data == 2) {
                     $.cookie("username", username, { expires: 7, path: '/', secure: false });
                     alert("修改密码成功");
