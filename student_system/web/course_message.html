@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>管理课程信息</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="common/common.css" rel="stylesheet">
     <link href="css/course_message.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="/index.html">主页</a></li>
     <li role="presentation"><a href="student_message.html">学生管理页</a></li>
+    <li role="presentation"><a href="teacher_message.html">教师管理页</a></li>
     <li role="presentation" class="active"><a href="#">课程管理页</a></li>
     <li role="presentation"><a href="score_message.html">成绩管理页</a></li>
 </ul>
@@ -25,10 +27,10 @@
         <caption>学生信息录入/处理</caption>
         <tbody>
         <tr>
-            <td width="170">课程号:<input type="text" maxlength="4" v-model="addArr.number" class="form-control" onKeyup="value=value.replace(/[\W]/ig, '')"></td>
-            <td width="170">课程名:<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
-            <td width="170">学分:<input type="text" maxlength="5" v-model="addArr.credit" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
-            <td width="170">开课时间:<input type="text" maxlength="21" v-model="addArr.start_time" class="form-control"></td>
+            <td width="170">课程号<input type="text" maxlength="4" v-model="addArr.number" class="form-control" onKeyup="value=value.replace(/[\W]/ig, '')"></td>
+            <td width="170">课程名<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
+            <td width="170">学分<input type="text" maxlength="5" v-model="addArr.credit" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
+            <td width="170">开课时间<input type="text" maxlength="21" v-model="addArr.start_time" class="form-control"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
         </tr>

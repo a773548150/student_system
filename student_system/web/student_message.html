@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>管理学生信息</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="common/common.css" rel="stylesheet">
     <link href="css/student_message.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="/index.html">主页</a></li>
     <li role="presentation" class="active"><a href="#">学生管理页</a></li>
+    <li role="presentation"><a href="teacher_message.html">教师管理页</a></li>
     <li role="presentation"><a href="course_message.html">课程管理页</a></li>
     <li role="presentation"><a href="score_message.html">成绩管理页</a></li>
 </ul>
@@ -26,16 +28,16 @@
         <caption>学生信息录入/处理 <span class="label label-warning">填写/编辑年龄时请输入出身年月日，如1999-10-01</span></caption>
         <tbody>
         <tr>
-            <td width="170">学号:<input type="number" v-model="addArr.number" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
-            <td width="170">姓名:<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
-            <td width="170">性别:
+            <td width="170">学号<input type="number" v-model="addArr.number" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
+            <td width="170">姓名<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
+            <td width="170">性别
                 <select class="form-control" v-model="addArr.sex">
                     <option>男</option>
                     <option>女</option>
                 </select>
             </td>
-            <td width="170">年龄:<input type="text" maxlength="10" v-model="addArr.age" class="form-control"></td>
-            <td width="170">专业:<input type="text" maxlength="20" v-model="addArr.major" class="form-control"></td>
+            <td width="170">年龄<input type="text" maxlength="10" v-model="addArr.age" class="form-control"></td>
+            <td width="170">专业<input type="text" maxlength="20" v-model="addArr.major" class="form-control"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
             <td><a class="btn btn-default btn-info" id="enteringExcel" href="entering_excel.html" role="button">导入excel表</a></td>
@@ -54,7 +56,7 @@
         </thead>
         <tbody>
         <tr v-for="item in studyArr">
-            <td><div class="content">{{item.number}}<input class="form-control" disabled="disabled" v-model="editArr.number" type="number" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="number" v-if="item.number==nowEditCol"></div></td>
             <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
             <td>
                 <div class="content">

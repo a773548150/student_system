@@ -11,16 +11,16 @@ function login(event) {
             dataType: 'json',
             data:{
                 "username": $("#inputUsername").val(),
-                "password": $("#inputPssword").val()
+                "password": $("#inputPassword").val()
             },
             success: function (data, status) {
                 console.log(data);
                 if (data == 1) {
                     $.cookie("username", username, { path: '/', secure: false });
-                    window.location = "/index.html";
+                    window.location = "/web/teacher.html";
                 } else if(data == 2) {
                     alert("已经登录");
-                    window.location = "/index.html";
+                    window.location = "/web/teacher.html";
                 } else if(data == 0) {
                     alert("账号或密码错误");
                 }

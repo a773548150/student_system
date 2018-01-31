@@ -11,10 +11,9 @@ function login(event) {
             dataType: 'json',
             data:{
                 "username": $("#inputUsername").val(),
-                "password": $("#inputPssword").val()
+                "password": $("#inputPassword").val()
             },
             success: function (data, status) {
-                console.log(data);
                 if (data == 1) {
                     $.cookie("username", username, { path: '/', secure: false });
                     window.location = "/index.html";
@@ -31,6 +30,7 @@ function login(event) {
         })
     }
 }
+
 
 function keyLogin(){
     if (event.keyCode==13)   //回车键的键值为13

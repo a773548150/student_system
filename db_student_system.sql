@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50553
+Source Server         : hiaocong
+Source Server Version : 50721
 Source Host           : localhost:3306
 Source Database       : db_student_system
 
 Target Server Type    : MYSQL
-Target Server Version : 50553
+Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-01-30 21:16:44
+Date: 2018-01-31 17:18:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -149,20 +149,41 @@ INSERT INTO `t_student` VALUES ('38', '1545484874516', '洪xx', '1', '2011-01-05
 -- ----------------------------
 DROP TABLE IF EXISTS `t_teacher`;
 CREATE TABLE `t_teacher` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `number` char(13) NOT NULL,
-  `name` char(20) NOT NULL,
-  `username` char(20) NOT NULL,
-  `password` char(32) NOT NULL,
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `number` char(13) NOT NULL COMMENT '教师编号',
+  `name` char(20) NOT NULL COMMENT '教师姓名',
+  `username` char(20) NOT NULL COMMENT '教师用户名',
+  `password` char(32) NOT NULL COMMENT '教师密码',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '假删除的状态，1表示正常，0表示加删除',
+  `delete_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '删除时间',
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建记录时插入时间',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='教师表';
 
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
-INSERT INTO `t_teacher` VALUES ('1', '1514090901', '张全蛋', '小张', '202cb962ac59075b964b07152d234b70', '0000-00-00 00:00:00', '2018-01-30 10:26:42');
+INSERT INTO `t_teacher` VALUES ('1', '151409090123', '张全蛋', '小张', '202cb962ac59075b964b07152d234b70', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2018-01-30 10:26:42');
+INSERT INTO `t_teacher` VALUES ('2', '1111111111111', '王尼玛', 'wang', '202cb962ac59075b964b07152d234b70', '1', '0000-00-00 00:00:00', '2018-01-31 16:04:10', '2018-01-31 16:07:19');
+
+-- ----------------------------
+-- Table structure for t_teacher_course
+-- ----------------------------
+DROP TABLE IF EXISTS `t_teacher_course`;
+CREATE TABLE `t_teacher_course` (
+  `id` int(11) NOT NULL COMMENT '自增id',
+  `teacher_id` int(11) NOT NULL COMMENT '外键教师表id',
+  `course_id` int(11) NOT NULL COMMENT '外键课程表id',
+  `update_time` datetime NOT NULL COMMENT '修改记录时插入当前时间',
+  `create_time` datetime NOT NULL COMMENT '创建记录时插入时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `teacher_id` (`teacher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师与课程的关联表';
+
+-- ----------------------------
+-- Records of t_teacher_course
+-- ----------------------------
 
 -- ----------------------------
 -- View structure for user

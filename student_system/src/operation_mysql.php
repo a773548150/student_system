@@ -158,6 +158,41 @@ class DB {
         return $content;
     }
 
+    // 插入教师信息，返回影响的行数
+    public function insert_teacher_message($message) {
+        $query = "insert into t_teacher(number, name, username, password, create_time) values('{$message['number']}', '{$message['name']}', '{$message['username']}', '{$message['password']}',  '{$this->currentTime}')";
+        $this->db_query($query);
+        return mysqli_affected_rows($this->mysqli);
+    }
+
+    // 修改教师信息，返回值有错误，只返回0？？
+    public function update_teacher_message($message, $number) {
+
+        foreach($message as $key => $item) {
+            $query = "update t_teacher set $key='{$item}', update_time='{$this->currentTime}' where number = '{$number}'";
+            $this->db_query($query);
+        }
+        return mysqli_affected_rows($this->mysqli);
+    }
+
+    // 删除教师信息，进行假删除，把教师状态status改为0
+    public function delete_teacher_message($number) {
+        $query = "update t_teacher set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
+        $this->db_query($query);
+        return mysqli_affected_rows($this->mysqli);
+    }
+
+    // 查询教师信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
+    public function select_teacher($message) {
+        $content = array();
+        $query = "select number, name, username, password, status from t_teacher where name like '%{$message}%' or number like '%{$message}%'";
+        $res = $this->db_query($query);
+        while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
+            $content[] = $row;
+        }
+        return $content;
+    }
+
     // 插入课程信息
     public function insert_course_message($message) {
         $query = "insert into t_course(number, name, credit, start_time, create_time) values('{$message['number']}', '{$message['name']}', '{$message['credit']}', '{$message['start_time']}', '{$this->currentTime}')";

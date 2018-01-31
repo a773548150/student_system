@@ -154,12 +154,14 @@ function updateAjax(){
 }
 
 function deleteAjax(number){
+    console.log(number);
     $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     $.ajax({
         url: "/src/delete_course.php",
         type: 'post',
         data: {'number': number},
         success: function (data, status) {
+
             $.bootstrapLoading.end();
             selectAjax();
         },

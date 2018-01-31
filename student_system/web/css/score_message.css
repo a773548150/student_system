@@ -1,31 +1,9 @@
-h3 {
-    width: 148px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #selectStudentNumber{
     width: 293px;
     margin: 30px auto 20px auto;
-}
-#reportCard{
-    margin-left: 10px;
-}
-#top_box {
-    width: 320px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #studentNumber {
     width: 200px;
 }
 
-#submitStu{
-    margin-top: 20px;
-}
-
-#resetStu{
-    margin-top: 20px;
-}
