@@ -8,9 +8,9 @@
 
 require("./operation_mysql.php");
 
-$username = $_POST['username'];
-$oldPassword = md5($_POST['oldPassword']);
-$newPassword = md5($_POST['newPassword']);
+$username = trim($_POST['username']);
+$oldPassword = trim(md5($_POST['oldPassword']));
+$newPassword = trim(md5($_POST['newPassword']));
 
 if ($username == "" || $oldPassword == "" || $newPassword == "") {
     echo "Input can't be empty";

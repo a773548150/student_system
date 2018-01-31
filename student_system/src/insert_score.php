@@ -8,9 +8,9 @@
 
 require("./operation_mysql.php");
 
-$studentNumber = $_POST['studentNumber'];
-$courseNumber = $_POST['courseNumber'];
-$score = $_POST['score'];
+$studentNumber = trim($_POST['studentNumber']);
+$courseNumber = trim($_POST['courseNumber']);
+$score = trim($_POST['score']);
 
 $message = array(
     'studentNumber' => $studentNumber,

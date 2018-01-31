@@ -98,22 +98,22 @@ var reportCardVm = new Vue({
     }
 })
 
+// 用于查询的ajax
 function selectAjax(){
     reportCardVm.courseArr = [];
-    $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
+    $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." }); // loading遮盖层开始
     $.ajax({
         url: "/src/select_course.php",
         type: 'post',
         dataType: 'json',
-        data:{"courseMessage": reportCardVm.courseMessage.courseMessage},
+        data:{"courseMessage": reportCardVm.courseMessage.courseMessage}, // 数据为vue的绑定数据
         success: function (data, status) {
-            console.log(reportCardVm.courseArr);
             $.each(data,function(index, value){
                 if (value.status != false) {
-                    reportCardVm.courseArr.push(value);
+                    reportCardVm.courseArr.push(value); // 保存查询数据到courseArr中
                 }
             });
-            $.bootstrapLoading.end();
+            $.bootstrapLoading.end(); // loading遮盖层结束
         },
         fail: function (err, status) {
             console.log(err)
@@ -144,7 +144,6 @@ function updateAjax(){
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
-            console.log(reportCardVm.editArr);
             $.bootstrapLoading.end();
             selectAjax();
         },
@@ -155,14 +154,12 @@ function updateAjax(){
 }
 
 function deleteAjax(number){
-    console.log(number);
     $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     $.ajax({
         url: "/src/delete_course.php",
         type: 'post',
         data: {'number': number},
         success: function (data, status) {
-            console.log(number);
             $.bootstrapLoading.end();
             selectAjax();
         },

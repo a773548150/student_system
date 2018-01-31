@@ -8,7 +8,7 @@
 
 require("./operation_mysql.php");
 
-$number = $_POST['number'];
+$number = trim($_POST['number']);
 
 if (strlen($number) != 13) {
     echo "Number is wrong";

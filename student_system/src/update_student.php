@@ -8,11 +8,11 @@
 
 require("./operation_mysql.php");
 
-$name = $_POST['name'];
-$sex = $_POST['sex'];
-$age = $_POST['age'];
-$major = $_POST['major'];
-$number = $_POST['number'];
+$name = trim($_POST['name']);
+$sex = trim($_POST['sex']);
+$age = trim($_POST['age']);
+$major = trim($_POST['major']);
+$number = trim($_POST['number']);
 
 $message = array(
     'name' => $name,

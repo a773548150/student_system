@@ -197,16 +197,17 @@ class DB {
 
     // 插入成绩，通过学号与课程名查询对应的id，再插入成绩表中
     public function insert_score($message) {
+        // 先通过学号查询得到学生id
         $query1 = "select id from t_student where number = '{$message['studentNumber']}'";
         $res1 = $this->db_query($query1);
         $row1 = $res1->fetch_object();
         $studentId = $row1->id;
-
+        // 再通过课程号查询得到课程的id
         $query2 = "select id from t_course where number = '{$message['courseNumber']}'";
         $res2 = $this->db_query($query2);
         $row2 = $res2->fetch_object();
         $courseId = $row2->id;
-
+        // 最后通过学生id和课程id还有成绩插入成绩表中
         $query3 = "insert into t_score(student_id, course_id, score, create_time) values('{$studentId}', '{$courseId}', '{$message['score']}', '{$this->currentTime}')";
         $this->db_query($query3);
 
