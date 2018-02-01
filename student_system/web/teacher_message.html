@@ -44,6 +44,7 @@
         <th width="170">姓名</th>
         <th width="170">登录账号</th>
         <th width="170">登录密码</th>
+        <th width="170">课程</th>
         <th colspan="2" width="120">操作</th>
         </thead>
         <tbody>
@@ -52,6 +53,13 @@
             <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
             <td><div class="content">{{item.username}}<input class="form-control" maxlength="10" v-model="editArr.username" type="text" v-if="item.number==nowEditCol"></div></td>
             <td><div class="content">{{item.password}}<input class="form-control" maxlength="20" v-model="editArr.password" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td>
+                <div class="content">
+                    <select class="form-control" id="selectCourse">
+                        <option v-for="sel in item.course_name" >{{sel}}</option>
+                    </select>
+                </div>
+            </td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>

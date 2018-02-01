@@ -11,7 +11,7 @@ require("./operation_mysql.php");
 $name = trim($_POST['name']);
 $number = trim($_POST['number']);
 $username = trim($_POST['username']);
-$password = trim($_POST['password']);
+$password = trim(md5($_POST['password']));
 
 $message = array(
     'name' => $name,

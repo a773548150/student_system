@@ -101,12 +101,13 @@ function selectAjax(){
         dataType: 'json',
         data:{"teacherMessage": reportCardVm.teacherMessage.teacherMessage},
         success: function (data, status) {
-            console.log(reportCardVm.teacherArr);
+
             $.each(data,function(index, value){
                 if (value.status != false) {
                     reportCardVm.teacherArr.push(value);
                 }
             });
+            console.log(reportCardVm.teacherArr);
             $.bootstrapLoading.end();
         },
         fail: function (err, status) {

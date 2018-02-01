@@ -185,7 +185,28 @@ class DB {
     // 查询教师信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
     public function select_teacher($message) {
         $content = array();
-        $query = "select number, name, username, password, status from t_teacher where name like '%{$message}%' or number like '%{$message}%'";
+        $count = 0;
+        $query = "select id, number, name, username, password, status from t_teacher where name like '%{$message}%' or username like '%{$message}%' or number like '%{$message}%'";
+        $res = $this->db_query($query);
+        while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
+            $content[$count] = $row;
+            $query2= "select t_course.`name` course_name from t_course, t_teacher_course where t_teacher_course.teacher_id = '{$row["id"]}' and t_course.id = t_teacher_course.course_id";
+            $res2 = $this->db_query($query2);
+            while($row2 =  $res2->fetch_assoc()) {
+                $content[$count]=array_merge_recursive($content[$count],$row2);
+            }
+            $count++;
+        }
+        return $content;
+    }
+
+    // 查询教师管理学生信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
+    public function select_teacher_student_course($message) {
+        $content = array();
+        $query = "select t_student.number, t_student.name as student_name, t_course.name as course_name,  score from t_student 
+                         left outer join t_score on t_student.id=t_score.student_id  
+                         left outer join t_course on t_course.id=t_score.course_id 
+                         where t_course.`name` = '{$message}'and t_student.status > 0 and t_course.status > 0;";
         $res = $this->db_query($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;

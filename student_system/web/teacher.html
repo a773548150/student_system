@@ -9,25 +9,15 @@
 </head>
 <body onkeydown="keySearch();">
 <div class="report_card" id="reportCard">
-    <div class="input-group input-group" id="selectStudentNumber">
+    <div class="input-group input-group" id="selectName">
         <span class="input-group-addon" id="sizing-addon1">课程名</span>
-        <input type="number" class="form-control" id="courseNumber" v-model="selectNumber.studentNumber" placeholder="请填入课程名" aria-describedby="sizing-addon1" oninput="if(value.length>13)value=value.slice(0,13)">
+        <select class="form-control" id="selectCourse"  v-model="selectArr.courseName">
+            <option v-for="sel in titleArr[0].course_name">{{sel}}</option>
+        </select>
         <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
     </div>
-    <table class="table table-hover">
-        <caption>学生信息录入/处理</caption>
-        <tbody>
-        <tr>
-            <td width="170">学号<input type="number" v-model="addArr.studentNumber" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
-            <td width="170">课程号<input type="text" maxlength="4" v-model="addArr.courseNumber" class="form-control"></td>
-            <td width="170">成绩<input type="text" maxlength="6" v-model="addArr.score" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
-            <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
-            <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
-        </tr>
-        </tbody>
-    </table>
     <table class="table table-hover table-striped">
         <caption>成绩列表</caption>
         <thead>
@@ -35,19 +25,26 @@
         <th width="170">姓名</th>
         <th width="170">课程名</th>
         <th width="170">成绩</th>
+        <th colspan="2" width="120">操作</th>
         </thead>
         <tbody>
         <tr v-for="item in studyArr">
             <td><div class="content">{{item.number}}</div></td>
             <td><div class="content">{{item.student_name}}</div></td>
             <td><div class="content">{{item.course_name}}</div></td>
-            <td><div class="content">{{item.score}}</div></td>
+            <td><div class="content">{{item.score}}</div><input class="form-control" maxlength="20" v-model="editArr.score" type="text" v-if="item.number==nowEditCol"></td>
+            <td>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>
+                <a class="btn btn-default" href="javascript:void(0);" v-on:click="sureEdit(item.number)" v-if="item.number==nowEditCol">确认</a>
+            </td>
         </tr>
         </tbody>
     </table>
 </div>
 <script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="common/common.js"></script>
 <script src="js/teacher.js"></script>
