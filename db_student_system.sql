@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-01-31 17:18:21
+Date: 2018-02-01 20:57:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,7 @@ CREATE TABLE `t_course` (
   `delete_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '删除时间',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `number` (`number`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='课程表';
 
@@ -89,7 +90,7 @@ INSERT INTO `t_score` VALUES ('4', '9', '4', '90.00', '2018-01-25 15:10:38', '00
 INSERT INTO `t_score` VALUES ('6', '5', '4', '89.00', '2018-01-25 15:12:25', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('9', '12', '3', '87.50', '2018-01-25 15:15:02', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('10', '12', '6', '85.00', '2018-01-25 15:15:32', '0000-00-00 00:00:00');
-INSERT INTO `t_score` VALUES ('11', '5', '5', '95.00', '2018-01-25 15:15:56', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('11', '5', '5', '97.00', '2018-01-25 15:15:56', '2018-02-01 20:49:50');
 INSERT INTO `t_score` VALUES ('12', '13', '2', '92.00', '2018-01-25 15:16:22', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('14', '12', '2', '89.00', '2018-01-28 22:51:27', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('16', '12', '8', '86.50', '2018-01-30 14:47:13', '0000-00-00 00:00:00');
@@ -109,7 +110,8 @@ CREATE TABLE `t_student` (
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
   `delete_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '删除时间',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `number` (`number`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 -- ----------------------------
@@ -130,13 +132,7 @@ INSERT INTO `t_student` VALUES ('22', '14343', '13', '0', '12', 'fasdf', '2018-0
 INSERT INTO `t_student` VALUES ('23', '12123', 'fsdfsdf', '0', 'fsd', 'sdfsd', '2018-01-28 20:37:31', '0000-00-00 00:00:00', '2018-01-28 20:47:34', '0');
 INSERT INTO `t_student` VALUES ('24', '15434', 'sss', '0', 'dfsdf', '234', '2018-01-28 20:49:56', '2018-01-28 21:49:52', '2018-01-28 21:50:23', '0');
 INSERT INTO `t_student` VALUES ('25', '1514080923151', '小明', '1', '1994-10-05', '网络工程', '2018-01-29 10:21:10', '2018-01-29 10:56:11', '0000-00-00 00:00:00', '1');
-INSERT INTO `t_student` VALUES ('26', '123', '小刚', '1', '32289', '美术', '2018-01-29 15:54:22', '0000-00-00 00:00:00', '2018-01-29 17:00:32', '0');
 INSERT INTO `t_student` VALUES ('27', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:05:27', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
-INSERT INTO `t_student` VALUES ('28', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:45:19', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
-INSERT INTO `t_student` VALUES ('29', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:58:45', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
-INSERT INTO `t_student` VALUES ('30', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:59:37', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
-INSERT INTO `t_student` VALUES ('31', '', '', '0', '12', '', '2018-01-30 10:34:19', '0000-00-00 00:00:00', '2018-01-30 10:38:59', '0');
-INSERT INTO `t_student` VALUES ('32', '', '', '0', '', '', '2018-01-30 10:38:54', '0000-00-00 00:00:00', '2018-01-30 10:38:59', '0');
 INSERT INTO `t_student` VALUES ('33', '1514080901474', 'kk', '0', '2000-01-01', '电子工程', '2018-01-30 15:06:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_student` VALUES ('34', '1514080454540', 'gg', '0', '2001-01-01', '会计', '2018-01-30 15:07:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_student` VALUES ('35', '1514080508485', 'hh', '0', '1999-05-14', '体育', '2018-01-30 15:10:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
@@ -158,7 +154,8 @@ CREATE TABLE `t_teacher` (
   `delete_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '删除时间',
   `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建记录时插入时间',
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `number` (`number`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='教师表';
 
 -- ----------------------------
@@ -172,18 +169,27 @@ INSERT INTO `t_teacher` VALUES ('2', '1111111111111', '王尼玛', 'wang', '202c
 -- ----------------------------
 DROP TABLE IF EXISTS `t_teacher_course`;
 CREATE TABLE `t_teacher_course` (
-  `id` int(11) NOT NULL COMMENT '自增id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `teacher_id` int(11) NOT NULL COMMENT '外键教师表id',
   `course_id` int(11) NOT NULL COMMENT '外键课程表id',
-  `update_time` datetime NOT NULL COMMENT '修改记录时插入当前时间',
-  `create_time` datetime NOT NULL COMMENT '创建记录时插入时间',
+  `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
+  `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建记录时插入时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='教师与课程的关联表';
+  UNIQUE KEY `TC_id` (`course_id`) USING BTREE,
+  KEY `teacher_id` (`teacher_id`) USING BTREE,
+  CONSTRAINT `TC_id` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`),
+  CONSTRAINT `TT_id` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='教师与课程的关联表';
 
 -- ----------------------------
 -- Records of t_teacher_course
 -- ----------------------------
+INSERT INTO `t_teacher_course` VALUES ('1', '1', '2', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_teacher_course` VALUES ('3', '1', '3', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_teacher_course` VALUES ('4', '2', '6', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_teacher_course` VALUES ('5', '2', '5', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_teacher_course` VALUES ('6', '1', '8', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `t_teacher_course` VALUES ('7', '2', '4', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- View structure for user
