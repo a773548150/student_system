@@ -6,6 +6,8 @@
  * Time: 16:57
  */
 
+// 此页面作为查询教师所教的某课的所有学生
+
 require("./operation_mysql.php");
 
 $message = trim($_POST['courseName']);

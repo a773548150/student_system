@@ -214,6 +214,24 @@ class DB {
         return $content;
     }
 
+    // 教师修改学生成绩
+    public function update_teacherToScore($message) {
+        // 先通过学号查询得到学生id
+        $query1 = "select id from t_student where number = '{$message['studentNumber']}'";
+        $res1 = $this->db_query($query1);
+        $row1 = $res1->fetch_object();
+        $studentId = $row1->id;
+        // 再通过课程名查询得到课程的id
+        $query2 = "select id from t_course where name = '{$message['courseName']}'";
+        $res2 = $this->db_query($query2);
+        $row2 = $res2->fetch_object();
+        $courseId = $row2->id;
+
+        $query = "update t_score set score = '{$message['score']}', update_time='{$this->currentTime}' where course_id = '{$courseId}' and student_id = '{$studentId}'";
+        $this->db_query($query);
+        return mysqli_affected_rows($this->mysqli);
+    }
+
     // 插入课程信息
     public function insert_course_message($message) {
         $query = "insert into t_course(number, name, credit, start_time, create_time) values('{$message['number']}', '{$message['name']}', '{$message['credit']}', '{$message['start_time']}', '{$this->currentTime}')";

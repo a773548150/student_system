@@ -31,14 +31,6 @@ var reportCardVm=new Vue({
                     break;
                 }
             }
-            // 当按确定时，将处于编辑的Y-m-d模式转为年龄
-            for(var i=0,len=this.studyArr.length;i<len;i++){
-                if(this.nowEditCol === this.studyArr[i]['number'] ){
-                    this.studyArr[i].age = toAge(this.studyArr[i].age);
-                    break;
-                }
-            }
-
             this.nowEditCol=-1;
         }
     },
@@ -50,10 +42,13 @@ var reportCardVm=new Vue({
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(this.nowEditCol === this.studyArr[i]['number'] ){
                     editO = this.studyArr[i];
+                    console.log(editO);
                     break;
                 }
             }
             return {
+                'studentNumber': editO.number,
+                'courseName': editO.course_name,
                 'score':editO.score
             }
         }
@@ -72,6 +67,7 @@ function selectTitleAjax(){
             $.each(data,function(index, value){
                 reportCardVm.titleArr.push(value);
             });
+            console.log(reportCardVm.titleArr[0]);
             $.bootstrapLoading.end();
         },
         fail: function (err, status) {
@@ -104,7 +100,7 @@ function selectAjax(){
 function updateAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
-        url: "/src/update_student.php",
+        url: "/src/update_teacherToScore.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
