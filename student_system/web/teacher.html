@@ -8,6 +8,7 @@
     <link href="css/teacher.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
+<h3>教师管理系统</h3>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectName">
         <span class="input-group-addon" id="sizing-addon1">课程名</span>
@@ -32,7 +33,7 @@
             <td><div class="content">{{item.number}}</div></td>
             <td><div class="content">{{item.student_name}}</div></td>
             <td><div class="content">{{item.course_name}}</div></td>
-            <td><div class="content">{{item.score}}</div><input class="form-control" maxlength="20" v-model="editArr.score" type="text" v-if="item.number==nowEditCol"></td>
+            <td><div class="content">{{item.score}}</div><input class="form-control" maxlength="6" v-model="editArr.score" type="text" v-if="item.number==nowEditCol"  onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>

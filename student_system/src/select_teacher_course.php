@@ -12,7 +12,11 @@ require("./operation_mysql.php");
 
 $message = trim($_POST['teacherMessage']);
 
-$db = new DB();
-$db->is_login_teacher();
-$res = $db->select_teacher($message);
-echo json_encode($res);
+if ($message == "") {
+    echo "Input can't be empty";
+} else {
+    $db = new DB();
+    $db->is_login_teacher();
+    $res = $db->select_teacher($message);
+    echo json_encode($res);
+}

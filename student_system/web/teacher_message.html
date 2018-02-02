@@ -49,10 +49,10 @@
         </thead>
         <tbody>
         <tr v-for="item in teacherArr">
-            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="number" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.number}}<input class="form-control" v-model="editArr.number" type="number" v-if="item.number==nowEditCol" oninput="if(value.length>13)value=value.slice(0,13)"></div></td>
             <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.username}}<input class="form-control" maxlength="10" v-model="editArr.username" type="text" v-if="item.number==nowEditCol"></div></td>
-            <td><div class="content">{{item.password}}<input class="form-control" maxlength="20" v-model="editArr.password" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.username}}<input class="form-control" maxlength="20" v-model="editArr.username" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.password}}<input class="form-control" maxlength="32" v-model="editArr.password" type="text" v-if="item.number==nowEditCol"></div></td>
             <td>
                 <div class="content">
                     <select class="form-control" id="selectCourse">
