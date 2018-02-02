@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : hiaocong
-Source Server Version : 50721
+Source Server         : localhost
+Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : db_student_system
 
 Target Server Type    : MYSQL
-Target Server Version : 50721
+Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-02-01 20:57:46
+Date: 2018-02-02 16:24:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `t_course` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='课程表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='课程表';
 
 -- ----------------------------
 -- Records of t_course
@@ -45,6 +45,7 @@ INSERT INTO `t_course` VALUES ('5', 'A006', '数字逻辑', '3.0', '2018-03-12 0
 INSERT INTO `t_course` VALUES ('6', 'A007', '大学英语1', '1.5', '2018-03-12 00:00:00', '2018-01-25 15:08:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_course` VALUES ('7', 'A008', '软件工程导论', '3.0', '2018-03-12 00:00:00', '2018-01-25 15:08:47', '2018-01-28 23:23:28', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_course` VALUES ('8', 'A009', '高等数学', '2.0', '2018-09-13 00:00:00', '2018-01-30 11:40:04', '2018-01-30 14:37:11', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_course` VALUES ('10', 'A013', '随意', '79.5', '2018-11-13 00:00:00', '2018-02-02 16:17:38', '2018-02-02 16:18:17', '2018-02-02 16:18:25', '0');
 
 -- ----------------------------
 -- Table structure for t_manager
@@ -80,7 +81,7 @@ CREATE TABLE `t_score` (
   KEY `cou_id` (`course_id`) USING BTREE,
   CONSTRAINT `t_score_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `t_score_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='成绩表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='成绩表';
 
 -- ----------------------------
 -- Records of t_score
@@ -89,11 +90,12 @@ INSERT INTO `t_score` VALUES ('3', '5', '1', '85.50', '2018-01-25 11:16:18', '00
 INSERT INTO `t_score` VALUES ('4', '9', '4', '90.00', '2018-01-25 15:10:38', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('6', '5', '4', '89.00', '2018-01-25 15:12:25', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('9', '12', '3', '87.50', '2018-01-25 15:15:02', '0000-00-00 00:00:00');
-INSERT INTO `t_score` VALUES ('10', '12', '6', '85.00', '2018-01-25 15:15:32', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('10', '12', '6', '88.00', '2018-01-25 15:15:32', '2018-02-02 16:23:05');
 INSERT INTO `t_score` VALUES ('11', '5', '5', '97.00', '2018-01-25 15:15:56', '2018-02-01 20:49:50');
 INSERT INTO `t_score` VALUES ('12', '13', '2', '92.00', '2018-01-25 15:16:22', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('14', '12', '2', '89.00', '2018-01-28 22:51:27', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('16', '12', '8', '86.50', '2018-01-30 14:47:13', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('17', '9', '1', '98.00', '2018-02-02 16:19:31', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for t_student
@@ -112,7 +114,7 @@ CREATE TABLE `t_student` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COMMENT='学生表';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 -- ----------------------------
 -- Records of t_student
@@ -134,11 +136,16 @@ INSERT INTO `t_student` VALUES ('24', '15434', 'sss', '0', 'dfsdf', '234', '2018
 INSERT INTO `t_student` VALUES ('25', '1514080923151', '小明', '1', '1994-10-05', '网络工程', '2018-01-29 10:21:10', '2018-01-29 10:56:11', '0000-00-00 00:00:00', '1');
 INSERT INTO `t_student` VALUES ('27', '123456', '小霞', '0', '32289', '音乐', '2018-01-29 16:05:27', '0000-00-00 00:00:00', '2018-01-29 16:59:46', '0');
 INSERT INTO `t_student` VALUES ('33', '1514080901474', 'kk', '0', '2000-01-01', '电子工程', '2018-01-30 15:06:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
-INSERT INTO `t_student` VALUES ('34', '1514080454540', 'gg', '0', '2001-01-01', '会计', '2018-01-30 15:07:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
-INSERT INTO `t_student` VALUES ('35', '1514080508485', 'hh', '0', '1999-05-14', '体育', '2018-01-30 15:10:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('34', '1514080454540', 'gg', '0', '2001-01-01', '会计', '2018-01-30 15:07:56', '0000-00-00 00:00:00', '2018-02-02 15:37:13', '0');
+INSERT INTO `t_student` VALUES ('35', '1514080508485', 'hh', '0', '1999-05-14', '体育', '2018-01-30 15:10:17', '0000-00-00 00:00:00', '2018-02-02 15:31:24', '0');
 INSERT INTO `t_student` VALUES ('36', '1514080485041', 'll', '1', '1998-06-24', '日语', '2018-01-30 15:11:10', '0000-00-00 00:00:00', '2018-01-30 16:28:04', '0');
-INSERT INTO `t_student` VALUES ('37', '1514080204578', '吴大大', '1', '1996-06-24', '旅游', '2018-01-30 15:48:08', '2018-01-30 18:47:24', '0000-00-00 00:00:00', '1');
-INSERT INTO `t_student` VALUES ('38', '1545484874516', '洪xx', '1', '2011-01-05', '国语', '2018-01-30 18:08:36', '2018-01-30 18:42:50', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('37', '1514080204578', '吴大大', '1', '1996-06-24', '旅游', '2018-01-30 15:48:08', '2018-01-30 18:47:24', '2018-02-02 15:30:51', '0');
+INSERT INTO `t_student` VALUES ('38', '1545484874516', '洪xx', '1', '2011-01-05', '国语', '2018-01-30 18:08:36', '2018-01-30 18:42:50', '2018-02-02 15:28:19', '0');
+INSERT INTO `t_student` VALUES ('39', '1345848441854', '木子', '0', '1992-08-30', '媒体', '2018-02-02 15:22:25', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('40', '1649845485014', 'peono', '1', '1992-07-21', '媒体', '2018-02-02 15:22:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('41', '1546541848544', '路飞', '1', '1001-01-01', '海盗', '2018-02-02 15:26:34', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('49', '1514026546875', '林x', '0', '1998-02-01', '网络', '2018-02-02 16:09:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `t_student` VALUES ('50', '1514080354868', '小c', '1', '1997-03-26', '软件', '2018-02-02 16:09:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
 
 -- ----------------------------
 -- Table structure for t_teacher
@@ -156,13 +163,14 @@ CREATE TABLE `t_teacher` (
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='教师表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='教师表';
 
 -- ----------------------------
 -- Records of t_teacher
 -- ----------------------------
 INSERT INTO `t_teacher` VALUES ('1', '151409090123', '张全蛋', '小张', '202cb962ac59075b964b07152d234b70', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2018-01-30 10:26:42');
 INSERT INTO `t_teacher` VALUES ('2', '1111111111111', '王尼玛', 'wang', '202cb962ac59075b964b07152d234b70', '1', '0000-00-00 00:00:00', '2018-01-31 16:04:10', '2018-01-31 16:07:19');
+INSERT INTO `t_teacher` VALUES ('3', '1541541854851', '林晓聪', 'a773548150', 'f95579bd0ae8401e0480f7f328f70846', '0', '2018-02-02 16:15:03', '2018-02-02 16:13:44', '2018-02-02 16:14:56');
 
 -- ----------------------------
 -- Table structure for t_teacher_course

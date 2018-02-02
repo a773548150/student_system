@@ -20,7 +20,7 @@ $message = array(
     'start_time' => $start_time
 );
 
-if ($name == "" || $number == "" || $credit == ""|| $start_time == ""|| $major == "") {
+if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
     echo "Input can't be empty";
 } else if (strlen($number) != 4) {
     echo "Number is wrong";

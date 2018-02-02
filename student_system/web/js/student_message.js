@@ -119,6 +119,7 @@ var reportCardVm=new Vue({
 
 function selectAjax(){
     reportCardVm.studyArr = [];
+    reportCardVm.storeAge = [];
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
         url: "/src/select_student.php",

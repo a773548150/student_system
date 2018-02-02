@@ -150,7 +150,7 @@ class DB {
     // 查询学生信息，通过模糊搜索姓名或学号，查询出学号，姓名，性别，年龄，专业，状态
     public function select_student($message) {
         $content = array();
-        $query = "select number, name, sex, age, major, status from t_student where name like '%{$message}%' or number like '%{$message}%'";
+        $query = "select number, name, sex, age, major, status from t_student where (name like '%{$message}%' or number like '%{$message}%') and status = 1";
         $res = $this->db_query($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
@@ -186,7 +186,7 @@ class DB {
     public function select_teacher($message) {
         $content = array();
         $count = 0;
-        $query = "select id, number, name, username, password, status from t_teacher where name like '%{$message}%' or username like '%{$message}%' or number like '%{$message}%'";
+        $query = "select id, number, name, username, password, status from t_teacher where (name like '%{$message}%' or username like '%{$message}%' or number like '%{$message}%') and status = 1";
         $res = $this->db_query($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[$count] = $row;
@@ -260,7 +260,7 @@ class DB {
     // 查询课程信息，通过课程名与课程号模糊搜索，查询出课程号，课程名，学分，开课时间，状态
     public function select_course($message) {
         $content = array();
-        $query = "select number, name, credit, start_time, status from t_course where name like '%{$message}%' or number like '%{$message}%'";
+        $query = "select number, name, credit, start_time, status from t_course where (name like '%{$message}%' or number like '%{$message}%') and status=1";
         $res = $this->db_query($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
@@ -346,22 +346,25 @@ class DB {
             //$a表示列号
             for($j=2;$j<=$highestRow;$j++)
             {
-                $number = $objPHPExcel->getActiveSheet()->getCell("A".$j)->getValue();//获取A(业主名字)列的值
-                $name = $objPHPExcel->getActiveSheet()->getCell("B".$j)->getValue();//获取B(密码)列的值
-                $sex = $objPHPExcel->getActiveSheet()->getCell("C".$j)->getValue();//获取C(手机号)列的值
-                $age = $objPHPExcel->getActiveSheet()->getCell("D".$j)->getValue();//获取D(地址)列的值
-                $major = $objPHPExcel->getActiveSheet()->getCell("E".$j)->getValue();//获取D(地址)列的值
+                $number = $objPHPExcel->getActiveSheet()->getCell("A".$j)->getValue();//获取A(学号)列的值
+                $name = $objPHPExcel->getActiveSheet()->getCell("B".$j)->getValue();//获取B(名字)列的值
+                $sex = $objPHPExcel->getActiveSheet()->getCell("C".$j)->getValue();//获取C(性别)列的值
+                $age = $objPHPExcel->getActiveSheet()->getCell("D".$j)->getValue();//获取D(年龄)列的值
+                $age = substr_replace($age,"-",4, 0);
+                $age = substr_replace($age,"-",7, 0);
+                $major = $objPHPExcel->getActiveSheet()->getCell("E".$j)->getValue();//获取D(专业)列的值
                 $currentTime = date("Y-m-d H:i:s");
                 //null 为主键id，自增可用null表示自动添加
                 $sql = "insert into t_student(number, name, sex, age, major, create_time) values('{$number}', '{$name}', '{$sex}', '{$age}', '{$major}', '{$currentTime}')";
-                $res = mysqli_query($this->mysqli, $sql);
+                $res = $this->db_query($sql);;
                 if ($res) {
-                    echo "<script>alert('添加成功！');history.go(-1);</script>";
+
                 }else{
                     echo "<script>alert('添加失败！');history.go(-1);</script>";
                     exit();
                 }
             }
+            echo "<script>alert('添加成功了！');history.go(-1);</script>";
         }
     }
 

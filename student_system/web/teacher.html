@@ -33,7 +33,7 @@
             <td><div class="content">{{item.number}}</div></td>
             <td><div class="content">{{item.student_name}}</div></td>
             <td><div class="content">{{item.course_name}}</div></td>
-            <td><div class="content">{{item.score}}</div><input class="form-control" maxlength="6" v-model="editArr.score" type="text" v-if="item.number==nowEditCol"  onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
+            <td><div class="content">{{item.score}}</div><input class="form-control" maxlength="6" v-model="editArr.score" type="text" v-if="item.number==nowEditCol" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>
