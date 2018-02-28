@@ -7,7 +7,7 @@ function modifyManagerPassword(event) {
     } else {
         $.bootstrapLoading.start({ loadingTips: "正在处理数据，请稍候..." });
         $.ajax({
-            url: "/src/update_manager_password.php",
+            url: "/src/updateManagerPassword.php",
             type: 'post',
             dataType: 'json',
             data:{

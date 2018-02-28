@@ -59,7 +59,7 @@ function selectTitleAjax(){
     reportCardVm.titleArr = [];
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
-        url: "/src/select_teacher_course.php",
+        url: "/src/selectTeacherCourse.php",
         type: 'post',
         dataType: 'json',
         data:{"teacherMessage": $.cookie("username")},
@@ -81,7 +81,7 @@ function selectAjax(){
     console.log(reportCardVm.selectArr.courseName);
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
-        url: "/src/select_teacher_student_course.php",
+        url: "/src/selectTeacherStudentCourse.php",
         type: 'post',
         dataType: 'json',
         data:{"courseName": reportCardVm.selectArr.courseName},
@@ -100,7 +100,7 @@ function selectAjax(){
 function updateAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
-        url: "/src/update_teacherToScore.php",
+        url: "/src/updateTeacherToScore.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {

@@ -3,10 +3,10 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2018/1/25
- * Time: 9:52
+ * Time: 10:18
  */
 
-require("./operation_mysql.php");
+require("./operationMysql.php");
 
 $number = trim($_POST['number']);
 $name = trim($_POST['name']);
@@ -27,6 +27,6 @@ if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
 } else {
     $db = new DB();
     $db->is_login_manager();
-    $res = $db->insert_course_message($message);
-    printf("%s rows have been insert.", $res);
+    $res = $db->update_course_message($message);
+    printf("%s rows have been update.", $res);
 }

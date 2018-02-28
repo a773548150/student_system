@@ -3,22 +3,22 @@
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2018/1/24
- * Time: 17:19
+ * Time: 16:47
  */
 
-require("./operation_mysql.php");
+require("./operationMysql.php");
 
 $name = trim($_POST['name']);
+$number = trim($_POST['number']);
 $sex = trim($_POST['sex']);
 $age = trim($_POST['age']);
 $major = trim($_POST['major']);
-$number = trim($_POST['number']);
 
 $message = array(
-    'name' => $name,
     'number' => $number,
-    'age' => $age,
+    'name' => $name,
     'sex' => $sex,
+    'age' => $age,
     'major' => $major
 );
 
@@ -28,9 +28,12 @@ if ($name == "" || $number == "" || $sex == ""|| $age == ""|| $major == "") {
     echo "Number is wrong";
 } else if (strlen($age) != 10) {
     echo "Age is wrong";
-} else{
+} else {
     $db = new DB();
     $db->is_login_manager();
-    $res = $db->update_student_message($message, $number);
-    printf("%s rows have been update.", $res);
+    $res = $db->insert_student_message($message);
+    printf("%s rows have been insert.", $res);
 }
+
+
+

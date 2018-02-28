@@ -6,7 +6,7 @@
  * Time: 11:16
  */
 
-require("./operation_mysql.php");
+require("./operationMysql.php");
 $db = new DB();
 $db->is_login_manager();
 //调用

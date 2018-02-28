@@ -6,7 +6,7 @@ function login(event) {
         event.preventDefault();
     } else {
         $.ajax({
-            url: "/src/login_teacher.php",
+            url: "/src/loginTeacher.php",
             type: 'post',
             dataType: 'json',
             data:{

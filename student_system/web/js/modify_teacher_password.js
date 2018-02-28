@@ -6,7 +6,7 @@ function modifyTeacherPassword(event) {
         event.preventDefault();
     } else {
         $.ajax({
-            url: "/src/update_teacher_password.php",
+            url: "/src/updateTeacherPassword.php",
             type: 'post',
             dataType: 'json',
             data:{

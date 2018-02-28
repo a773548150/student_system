@@ -6,7 +6,7 @@ function login(event) {
         event.preventDefault();
     } else {
         $.ajax({
-            url: "/src/login_manager.php",
+            url: "/src/loginManager.php",
             type: 'post',
             dataType: 'json',
             data:{

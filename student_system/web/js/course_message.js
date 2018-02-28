@@ -103,7 +103,7 @@ function selectAjax(){
     reportCardVm.courseArr = [];
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." }); // loading遮盖层开始
     $.ajax({
-        url: "/src/select_course.php",
+        url: "/src/selectCourse.php",
         type: 'post',
         dataType: 'json',
         data:{"courseMessage": reportCardVm.courseMessage.courseMessage}, // 数据为vue的绑定数据
@@ -124,7 +124,7 @@ function insertAjax(){
     console.log(reportCardVm.insertArr);
     $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
-        url: "/src/insert_course.php",
+        url: "/src/insertCourse.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
@@ -140,7 +140,7 @@ function insertAjax(){
 function updateAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
-        url: "/src/update_course.php",
+        url: "/src/updateCourse.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
@@ -157,10 +157,10 @@ function deleteAjax(number){
     console.log(number);
     $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     $.ajax({
-        url: "/src/delete_course.php",
+        url: "/src/deleteCourse.php",
         type: 'post',
         data: {'number': number},
-        success: function (data, status) {
+        success: function (data, Cstatus) {
 
             $.bootstrapLoading.end();
             selectAjax();

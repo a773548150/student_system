@@ -7,7 +7,7 @@
  */
 
 // 此文件作为教师修改学生成绩使用
-require("./operation_mysql.php");
+require("./operationMysql.php");
 
 $studentNumber = trim($_POST['studentNumber']);
 $courseName = trim($_POST['courseName']);

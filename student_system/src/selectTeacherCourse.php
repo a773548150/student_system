@@ -8,7 +8,7 @@
 
 // 此页面作为查询教师所有教的课程
 
-require("./operation_mysql.php");
+require("./operationMysql.php");
 
 $message = trim($_POST['teacherMessage']);
 

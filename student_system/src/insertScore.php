@@ -6,7 +6,7 @@
  * Time: 10:52
  */
 
-require("./operation_mysql.php");
+require("./operationMysql.php");
 
 $studentNumber = trim($_POST['studentNumber']);
 $courseNumber = trim($_POST['courseNumber']);

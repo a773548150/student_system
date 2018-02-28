@@ -122,7 +122,7 @@ function selectAjax(){
     reportCardVm.storeAge = [];
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
-        url: "/src/select_student.php",
+        url: "/src/selectStudent.php",
         type: 'post',
         dataType: 'json',
         data:{"studentMessage": reportCardVm.studentMessage.studentMessage},
@@ -145,7 +145,7 @@ function selectAjax(){
 function insertAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
-        url: "/src/insert_student.php",
+        url: "/src/insertStudent.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
@@ -161,7 +161,7 @@ function insertAjax(){
 function updateAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在修改数据，请稍候..." });
     $.ajax({
-        url: "/src/update_student.php",
+        url: "/src/updateStudent.php",
         type: 'post',
         data: reportCardVm.editArr,
         success: function (data, status) {
@@ -177,7 +177,7 @@ function updateAjax(){
 function deleteAjax(number){
     $.bootstrapLoading.start({ loadingTips: "正在删除数据，请稍候..." });
     $.ajax({
-        url: "/src/delete_student.php",
+        url: "/src/deleteStudent.php",
         type: 'post',
         data: {'number': number},
         success: function (data, status) {

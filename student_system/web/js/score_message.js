@@ -57,7 +57,7 @@ function selectAjax(){
     reportCardVm.studyArr = [];
     $.bootstrapLoading.start({ loadingTips: "正在查询数据，请稍候..." });
     $.ajax({
-        url: "/src/select_score.php",
+        url: "/src/selectScore.php",
         type: 'post',
         dataType: 'json',
         data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
@@ -77,7 +77,7 @@ function insertAjax(){
     console.log(reportCardVm.insertArr);
     $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({
-        url: "/src/insert_score.php",
+        url: "/src/insertScore.php",
         type: 'post',
         data: reportCardVm.insertArr,
         success: function (data, status) {
