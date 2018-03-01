@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    selectAjax();
+});
+
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
@@ -103,7 +107,7 @@ function selectAjax(){
         success: function (data, status) {
             $.each(data,function(index, value){
                 if (value.status != false) {
-                    reportCardVm.teacherArr.push(value);
+                    reportCardVm.teacherArr.unshift(value);
                 }
             });
             $.bootstrapLoading.end();

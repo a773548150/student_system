@@ -1,3 +1,15 @@
+$(document).ready(function() {
+    selectAjax();
+
+
+});
+$('.form_datetime').datetimepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    todayBtn: true,
+    language:'zh-CN',
+    pickerPosition:"bottom-left"
+});
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
@@ -11,6 +23,14 @@ var reportCardVm=new Vue({
         searchTxt:''//搜索字段
     },
     methods:{
+        dateDefind:function() {
+            var self = this;
+            $('.form_datetime').datetimepicker()
+                .on('hide', function (ev) {
+                    var value = $(".form_datetime").val();
+                    self.addArr.age = value;
+                });
+        },
         //启动索引index数据编辑
         startEdit:function(id){
             this.nowEditCol=id;
@@ -63,6 +83,7 @@ var reportCardVm=new Vue({
         },
         //新增成绩
         submitStu:function(){
+            alert(this.addArr.age);
             if (this.addArr.number == '' || this.addArr.name == '' || this.addArr.sex == '' || this.addArr.age == '' || this.addArr.major == '') {
                 alert("输入不能为空！");
             } else if (this.addArr.number.length < 13) {
@@ -93,6 +114,9 @@ var reportCardVm=new Vue({
                 'major':''
             }
         }
+    },
+    mounted: function () {
+        this.dateDefind();
     },
     computed:{
 
@@ -132,7 +156,7 @@ function selectAjax(){
                 if (value.status != false) {
                     reportCardVm.storeAge.push(value.age); // 存储Y-m-d格式的年龄到storeAge中
                     value.age = toAge(value.age);
-                    reportCardVm.studyArr.push(value);
+                    reportCardVm.studyArr.unshift(value);
                 }
             });
             $.bootstrapLoading.end();
@@ -142,6 +166,7 @@ function selectAjax(){
         }
     })
 }
+
 function insertAjax(){
     $.bootstrapLoading.start({ loadingTips: "正在插入数据，请稍候..." });
     $.ajax({

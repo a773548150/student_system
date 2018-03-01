@@ -1,3 +1,6 @@
+$(document).ready(function() {
+    selectAjax();
+});
 var reportCardVm = new Vue({
     el:'#reportCard',
     data:{
@@ -110,7 +113,7 @@ function selectAjax(){
         success: function (data, status) {
             $.each(data,function(index, value){
                 if (value.status != false) {
-                    reportCardVm.courseArr.push(value); // 保存查询数据到courseArr中
+                    reportCardVm.courseArr.unshift(value); // 保存查询数据到courseArr中
                 }
             });
             $.bootstrapLoading.end(); // loading遮盖层结束

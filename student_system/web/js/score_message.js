@@ -13,6 +13,10 @@
 //     })
 // });
 
+$(document).ready(function() {
+    selectAjax();
+});
+
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
@@ -64,7 +68,7 @@ function selectAjax(){
         success: function (data, status) {
             console.log(reportCardVm.studyArr);
             $.each(data,function(index, value){
-                reportCardVm.studyArr.push(value);
+                reportCardVm.studyArr.unshift(value);
             });
             $.bootstrapLoading.end();
         },
