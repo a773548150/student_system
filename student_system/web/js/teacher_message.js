@@ -42,7 +42,9 @@ var reportCardVm=new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.teacherArr.length;i<len;i++){
                 if(id === this.teacherArr[i]['number'] ){
-                    deleteAjax(this.teacherArr[i]['number']);
+                    if (confirm("是否删除?")) {
+                        deleteAjax(this.teacherArr[i]['number']);
+                    }
                     break;
                 }
             }

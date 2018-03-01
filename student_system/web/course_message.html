@@ -6,6 +6,7 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="common/common.css" rel="stylesheet">
     <link href="css/course_message.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 </head>
 <body onkeydown="keySearch();">
 <ul class="nav nav-tabs">
@@ -30,7 +31,7 @@
             <td width="170">课程号<input type="text" maxlength="4" v-model="addArr.number" class="form-control" onKeyup="value=value.replace(/[\W]/ig, '')"></td>
             <td width="170">课程名<input type="text" maxlength="20" v-model="addArr.name" class="form-control"></td>
             <td width="170">学分<input type="text" maxlength="5" v-model="addArr.credit" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
-            <td width="170">开课时间<input type="text" maxlength="21" v-model="addArr.start_time" class="form-control"></td>
+            <td width="170">开课时间<input type="text" value="2018-03-04 08:30" readonly class="form_datetime form-control" id="timePicker-insert"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
         </tr>
@@ -65,6 +66,8 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="common/common.js"></script>
-<script src="js/course_message.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="js/course_message.js" type="text/javascript"></script>
 </body>
 </html>

@@ -1,15 +1,16 @@
 $(document).ready(function() {
     selectAjax();
 
+    $('#timePicker-insert').datetimepicker({
+        minView: "month",
+        format: "yyyy-mm-dd",
+        autoclose: true,
+        todayBtn: true,
+        language:'zh-CN',
+        pickerPosition:"bottom-left"
+    });
+});
 
-});
-$('.form_datetime').datetimepicker({
-    format: "yyyy-mm-dd",
-    autoclose: true,
-    todayBtn: true,
-    language:'zh-CN',
-    pickerPosition:"bottom-left"
-});
 var reportCardVm=new Vue({
     el:'#reportCard',
     data:{
@@ -23,26 +24,48 @@ var reportCardVm=new Vue({
         searchTxt:''//搜索字段
     },
     methods:{
+        //将日历插件的值赋值给 addArr.age
         dateDefind:function() {
             var self = this;
-            $('.form_datetime').datetimepicker()
+            $('#timePicker-insert').datetimepicker()
                 .on('hide', function (ev) {
-                    var value = $(".form_datetime").val();
+                    var value = $("#timePicker-insert").val();
                     self.addArr.age = value;
                 });
         },
-        //启动索引index数据编辑
-        startEdit:function(id){
-            this.nowEditCol=id;
+        //将日历插件的值赋值给 editArr.age
+        dateEdit:function() {
+            var self = this;
+            $('#timePicker-edit').datetimepicker({
+                minView: "month",
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                todayBtn: true,
+                language:'zh-CN',
+                pickerPosition:"bottom-left"
+            });
+            $('#timePicker-edit').datetimepicker()
+                .on('hide', function (ev) {
+                    var value = $("#timePicker-edit").val();
+                    self.editArr.age = value;
+                });
         },
-        //取消编辑状态
-        cancelEdit:function(){
-            // 把y-m-d格式转换为年龄
+        turnToDigitally:function() {
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(this.nowEditCol === this.studyArr[i]['number'] ) {
                     this.studyArr[i].age = toAge(this.editArr.age);
                 }
             }
+        },
+        //启动索引index数据编辑
+        startEdit:function(id){
+            this.turnToDigitally();
+            this.nowEditCol=id;
+        },
+        //取消编辑状态
+        cancelEdit:function(){
+            // 把y-m-d格式转换为年龄
+            this.turnToDigitally();
             this.nowEditCol=-1;
         },
         //启动索引index数据修改确认
@@ -76,20 +99,19 @@ var reportCardVm=new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(id === this.studyArr[i]['number'] ){
-                    deleteAjax(this.studyArr[i]['number']);
+                    if (confirm("是否删除？")) {
+                        deleteAjax(this.studyArr[i]['number']);
+                    }
                     break;
                 }
             }
         },
         //新增成绩
         submitStu:function(){
-            alert(this.addArr.age);
             if (this.addArr.number == '' || this.addArr.name == '' || this.addArr.sex == '' || this.addArr.age == '' || this.addArr.major == '') {
                 alert("输入不能为空！");
             } else if (this.addArr.number.length < 13) {
                 alert("学号不能少于13位！");
-            } else if (this.addArr.age.length < 10) {
-                alert("年龄按规范输入，如1999-10-01");
             } else {
                 var addArr={
                     'number':this.addArr.number,
@@ -115,8 +137,9 @@ var reportCardVm=new Vue({
             }
         }
     },
-    mounted: function () {
+    beforeUpdate: function () {
         this.dateDefind();
+        this.dateEdit();
     },
     computed:{
 
@@ -154,7 +177,7 @@ function selectAjax(){
             $.each(data,function(index, value){
                 value.sex = (value.sex == 1 || value.sex == "男") ? "男":"女";
                 if (value.status != false) {
-                    reportCardVm.storeAge.push(value.age); // 存储Y-m-d格式的年龄到storeAge中
+                    reportCardVm.storeAge.unshift(value.age); // 存储Y-m-d格式的年龄到storeAge中
                     value.age = toAge(value.age);
                     reportCardVm.studyArr.unshift(value);
                 }

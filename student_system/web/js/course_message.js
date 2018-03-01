@@ -1,5 +1,14 @@
 $(document).ready(function() {
     selectAjax();
+
+    $('#timePicker-insert').datetimepicker({
+        minView: "hour",
+        format: "yyyy-mm-dd hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        language:'zh-CN',
+        pickerPosition:"bottom-left"
+    });
 });
 var reportCardVm = new Vue({
     el:'#reportCard',
@@ -13,6 +22,15 @@ var reportCardVm = new Vue({
         searchTxt:''//搜索字段
     },
     methods:{
+        //将日历插件的值赋值给 addArr.age
+        dateDefind:function() {
+            var self = this;
+            $('#timePicker-insert').datetimepicker()
+                .on('hide', function (ev) {
+                    var value = $("#timePicker-insert").val();
+                    self.addArr.start_time = value;
+                });
+        },
         //启动索引index数据编辑
         startEdit:function(id){
             this.nowEditCol=id;
@@ -43,7 +61,9 @@ var reportCardVm = new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.courseArr.length;i<len;i++){
                 if(id === this.courseArr[i]['number'] ){
-                    deleteAjax(this.courseArr[i]['number']);
+                    if (confirm("是否删除？")) {
+                        deleteAjax(this.courseArr[i]['number']);
+                    }
                     break;
                 }
             }
@@ -80,6 +100,9 @@ var reportCardVm = new Vue({
         }
 
     },
+    beforeUpdate: function () {
+        this.dateDefind();
+    },
     computed:{
 
         //存储当前编辑的对象
@@ -113,13 +136,15 @@ function selectAjax(){
         success: function (data, status) {
             $.each(data,function(index, value){
                 if (value.status != false) {
+                    value.start_time = value.start_time.slice(0, 16);
                     reportCardVm.courseArr.unshift(value); // 保存查询数据到courseArr中
                 }
             });
             $.bootstrapLoading.end(); // loading遮盖层结束
         },
         fail: function (err, status) {
-            console.log(err)
+            console.log(err);
+            window.location="/web/login.html";
         }
     })
 }
