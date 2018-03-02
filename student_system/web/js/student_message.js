@@ -137,7 +137,7 @@ var reportCardVm=new Vue({
             }
         }
     },
-    beforeUpdate: function () {
+    updated: function () {
         this.dateDefind();
         this.dateEdit();
     },

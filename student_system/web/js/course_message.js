@@ -10,6 +10,7 @@ $(document).ready(function() {
         pickerPosition:"bottom-left"
     });
 });
+
 var reportCardVm = new Vue({
     el:'#reportCard',
     data:{
@@ -29,6 +30,23 @@ var reportCardVm = new Vue({
                 .on('hide', function (ev) {
                     var value = $("#timePicker-insert").val();
                     self.addArr.start_time = value;
+                });
+        },
+        //将日历插件的值赋值给 editArr.start_time
+        dateEdit:function() {
+            var self = this;
+            $('#timePicker-edit').datetimepicker({
+                minView: "hour",
+                format: "yyyy-mm-dd hh:ii",
+                autoclose: true,
+                todayBtn: true,
+                language:'zh-CN',
+                pickerPosition:"bottom-left"
+            });
+            $('#timePicker-edit').datetimepicker()
+                .on('hide', function (ev) {
+                    var value = $("#timePicker-edit").val();
+                    self.editArr.start_time = value;
                 });
         },
         //启动索引index数据编辑
@@ -100,11 +118,11 @@ var reportCardVm = new Vue({
         }
 
     },
-    beforeUpdate: function () {
+    updated: function() {
         this.dateDefind();
+        this.dateEdit();
     },
     computed:{
-
         //存储当前编辑的对象
         editArr:function(){
             var editO={};

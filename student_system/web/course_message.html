@@ -51,7 +51,7 @@
             <td><div class="content">{{item.number}}<input class="form-control" maxlength="4" v-model="editArr.number" type="text" v-if="item.number==nowEditCol" onKeyup="value=value.replace(/[\W]/ig, '')"></div></td>
             <td><div class="content">{{item.name}}<input class="form-control" maxlength="20" v-model="editArr.name" type="text" v-if="item.number==nowEditCol"></div></td>
             <td><div class="content">{{item.credit}}<input class="form-control" maxlength="5" v-model="editArr.credit" type="text" v-if="item.number==nowEditCol" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></div></td>
-            <td><div class="content">{{item.start_time}}<input class="form-control" maxlength="21" v-model="editArr.start_time" type="text" v-if="item.number==nowEditCol"></div></td>
+            <td><div class="content">{{item.start_time}}<input size="16" type="text" value="2012-06-15 14:45" v-model="editArr.start_time" readonly class="form-control form_datetime" v-if="item.number==nowEditCol" id="timePicker-edit"></div></td>
             <td>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="startEdit(item.number)" v-if="item.number!=nowEditCol">编辑</a>
                 <a class="btn btn-default" href="javascript:void(0);" v-on:click="cancelEdit" v-if="item.number==nowEditCol">取消</a>
