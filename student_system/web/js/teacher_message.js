@@ -42,7 +42,7 @@ var reportCardVm=new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.teacherArr.length;i<len;i++){
                 if(id === this.teacherArr[i]['number'] ){
-                    if (confirm("是否删除?")) {
+                    if (confirm("是否删除编号为：" + this.teacherArr[i]['number'])) {
                         deleteAjax(this.teacherArr[i]['number']);
                     }
                     break;
@@ -107,6 +107,9 @@ function selectAjax(){
         dataType: 'json',
         data:{"teacherMessage": reportCardVm.teacherMessage.teacherMessage},
         success: function (data, status) {
+            if(data == "1") {
+                window.location = "/web/login.html";
+            }
             $.each(data,function(index, value){
                 if (value.status != false) {
                     reportCardVm.teacherArr.unshift(value);

@@ -23,12 +23,12 @@ var reportCardVm=new Vue({
         selectNumber: {'studentNumber':''},
         studyArr:[],//成绩花名册
         insertArr:{},
-        addArr:{'studentNumber':'','courseNumber':'','score':''},//新增的表单字段
+        addArr:{'studentNumber':'','courseName':'','score':''},//新增的表单字段
     },
     methods:{
         //新增成绩
         submitStu:function(){
-            if (this.addArr.studentNumber == '' || this.addArr.courseNumber == '' || this.addArr.score == '') {
+            if (this.addArr.studentNumber == '' || this.addArr.courseName == '' || this.addArr.score == '') {
                 alert("输入不能为空！");
             } else if(this.addArr.studentNumber.length < 13){
                 alert("学号不能少于13位！");
@@ -37,7 +37,7 @@ var reportCardVm=new Vue({
             } else{
                 var addArr={
                     'studentNumber':this.addArr.studentNumber,
-                    'courseNumber':this.addArr.courseNumber,
+                    'courseName':this.addArr.courseName,
                     'score':this.addArr.score
                 };
                 this.insertArr = addArr;
@@ -50,7 +50,7 @@ var reportCardVm=new Vue({
         resetStu:function(){
             this.addArr={
                 'studentNumber':'',
-                'courseNumber':'',
+                'courseName':'',
                 'score':''
             }
         }
@@ -66,6 +66,9 @@ function selectAjax(){
         dataType: 'json',
         data:{"studentNumber": reportCardVm.selectNumber.studentNumber},
         success: function (data, status) {
+            if(data == "1") {
+                window.location = "/web/login.html";
+            }
             console.log(reportCardVm.studyArr);
             $.each(data,function(index, value){
                 reportCardVm.studyArr.unshift(value);
@@ -93,3 +96,26 @@ function insertAjax(){
         }
     })
 }
+
+$("#inputScore").blur(function(){
+    if(parseFloat($("#inputScore").val()) > 100){
+        alert("输入的值不允许大于100");
+        $("#inputScore").val("");
+    }
+})
+
+$(document).ready(function(){
+    var obj = $("#courseNameSelect");
+    $.ajax({
+        url: "/src/select_all_course_name.php",
+        type: 'post',
+        success: function (data, status) {
+            $.each(JSON.parse(data),function(index, value) {
+                obj.append("<option value='"+value.name+"'>"+value.name+"</option>");
+            })
+        },
+        fail: function (err, status) {
+            console.log(err);
+        }
+    })
+})

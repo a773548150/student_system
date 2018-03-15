@@ -138,3 +138,25 @@ jQuery.bootstrapLoading = {
         $("#loadingPage").remove();
     }
 }
+
+//退出登录
+function exitLogin() {
+    $.ajax({
+        url: "/src/loginExitManager.php",
+        type: 'post',
+        dataType: 'json',
+        success: function (data, status) {
+            if (data == 1) {
+                alert("当前没有登录");
+                window.location = "/web/login.html";
+            } else if(data == 0) {
+                alert("成功退出登录");
+                $.cookie('username', null);
+                window.location = "/web/login.html";
+            }
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}

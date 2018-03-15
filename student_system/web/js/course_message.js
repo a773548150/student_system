@@ -79,7 +79,7 @@ var reportCardVm = new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.courseArr.length;i<len;i++){
                 if(id === this.courseArr[i]['number'] ){
-                    if (confirm("是否删除？")) {
+                    if (confirm("是否删除课程号为：" + this.courseArr[i]['number'])) {
                         deleteAjax(this.courseArr[i]['number']);
                     }
                     break;
@@ -90,9 +90,7 @@ var reportCardVm = new Vue({
         submitStu:function(){
             if (this.addArr.number == '' || this.addArr.name == '' || this.addArr.credit == '' || this.addArr.start_time == '') {
                 alert("输入不能为空！");
-            } else if(this.addArr.credit.toString().indexOf(".") < 0 || this.addArr.credit.toString().split(".")[1].length != 1){
-                alert("学分按规范输入，如3.5");
-            } else if (this.addArr.start_time.length < 10) {
+            }else if (this.addArr.start_time.length < 10) {
                 alert("开课时间输入过短！");
             } else {
                 var addArr={
@@ -152,6 +150,9 @@ function selectAjax(){
         dataType: 'json',
         data:{"courseMessage": reportCardVm.courseMessage.courseMessage}, // 数据为vue的绑定数据
         success: function (data, status) {
+            if(data == "1") {
+                window.location = "/web/login.html";
+            }
             $.each(data,function(index, value){
                 if (value.status != false) {
                     value.start_time = value.start_time.slice(0, 16);
@@ -216,3 +217,9 @@ function deleteAjax(number){
         }
     })
 }
+$("#inputCredit").blur(function(){
+    if(parseFloat($("#inputCredit").val()) > 100){
+        alert("输入的值不允许大于100");
+        $("#inputCredit").val("");
+    }
+})

@@ -64,8 +64,9 @@ class DB {
     // 判断是否登录管理员，已经登录返回true，未登录返回unlogin
     public function is_login_manager() {
         session_start();
+        //未登录返回1
         if (! isset($_SESSION['username'])) {
-            echo "unloginManager";
+            echo "1";
             exit();
         } else {
             return true;
@@ -269,6 +270,18 @@ class DB {
         return $content;
     }
 
+    // 查询所有课程名并返回
+    public function select_all_course_name() {
+        $content = array();
+        $query = "select name from t_course";
+        $res = $this->db_query($query);
+        while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
+            $content[] = $row;
+        }
+
+        return $content;
+    }
+
     // 插入成绩，通过学号与课程名查询对应的id，再插入成绩表中
     public function insert_score($message) {
         // 先通过学号查询得到学生id
@@ -277,7 +290,7 @@ class DB {
         $row1 = $res1->fetch_object();
         $studentId = $row1->id;
         // 再通过课程号查询得到课程的id
-        $query2 = "select id from t_course where number = '{$message['courseNumber']}'";
+        $query2 = "select id from t_course where name = '{$message['courseName']}'";
         $res2 = $this->db_query($query2);
         $row2 = $res2->fetch_object();
         $courseId = $row2->id;

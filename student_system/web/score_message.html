@@ -14,6 +14,8 @@
     <li role="presentation"><a href="teacher_message.html">教师管理页</a></li>
     <li role="presentation"><a href="course_message.html">课程管理页</a></li>
     <li role="presentation" class="active"><a href="#">成绩管理页</a></li>
+    <li role="presentation"><a href="#" onclick="exitLogin()">退出登录</a></li>
+    <li role="presentation"><a href="/web/modify_manager_password.html">修改密码</a></li>
 </ul>
 <div class="report_card" id="reportCard">
     <div class="input-group input-group" id="selectStudentNumber">
@@ -28,8 +30,11 @@
         <tbody>
         <tr>
             <td width="170">学号<input type="number" v-model="addArr.studentNumber" class="form-control" oninput="if(value.length>13)value=value.slice(0,13)"></td>
-            <td width="170">课程号<input type="text" maxlength="4" v-model="addArr.courseNumber" class="form-control"></td>
-            <td width="170">成绩<input type="text" maxlength="6" v-model="addArr.score" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
+            <td width="170">课程名
+                <select class="form-control" v-model="addArr.courseName" id="courseNameSelect">
+                </select>
+            </td>
+            <td width="170">成绩<input type="text" maxlength="6" id="inputScore" v-model="addArr.score" class="form-control" onkeypress="if(/\.\d\d$/.test(value))event.returnValue=false" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
             <td width="60"><a class="btn btn-default" id="submitStu" href="javascript:void(0);" v-on:click="submitStu">录入</a></td>
             <td width="60"><a class="btn btn-default" id="resetStu" href="javascript:void(0);" v-on:click="resetStu">重置</a></td>
         </tr>
@@ -55,6 +60,7 @@
 </div>
 <script src="js/vue.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
+<script src="/web/js/jquery.cookie.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="common/common.js"></script>
 <script src="js/score_message.js"></script>

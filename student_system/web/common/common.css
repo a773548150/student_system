@@ -2,6 +2,14 @@
     text-align: center;
 }
 
+.nav-tabs > li:nth-child(n+6){
+    float: right;
+}
+
+.nav-tabs > li:nth-child(n+6) > a{
+    color: #808080;
+}
+
 #submitStu{
     margin-top: 20px;
 }

@@ -99,7 +99,7 @@ var reportCardVm=new Vue({
         deleteStu:function(id){
             for(var i=0,len=this.studyArr.length;i<len;i++){
                 if(id === this.studyArr[i]['number'] ){
-                    if (confirm("是否删除？")) {
+                    if (confirm("是否删除学号为："+ this.studyArr[i]['number'])) {
                         deleteAjax(this.studyArr[i]['number']);
                     }
                     break;
@@ -174,6 +174,9 @@ function selectAjax(){
         dataType: 'json',
         data:{"studentMessage": reportCardVm.studentMessage.studentMessage},
         success: function (data, status) {
+            if(data == "1") {
+                window.location = "/web/login.html";
+            }
             $.each(data,function(index, value){
                 value.sex = (value.sex == 1 || value.sex == "男") ? "男":"女";
                 if (value.status != false) {
@@ -185,6 +188,7 @@ function selectAjax(){
             $.bootstrapLoading.end();
         },
         fail: function (err, status) {
+            window.location = "/web/login.html";
             console.log(err)
         }
     })

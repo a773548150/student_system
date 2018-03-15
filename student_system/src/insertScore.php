@@ -9,21 +9,21 @@
 require("./operationMysql.php");
 
 $studentNumber = trim($_POST['studentNumber']);
-$courseNumber = trim($_POST['courseNumber']);
+$courseName = trim($_POST['courseName']);
 $score = trim($_POST['score']);
 
 $message = array(
     'studentNumber' => $studentNumber,
-    'courseNumber' => $courseNumber,
+    'courseName' => $courseName,
     'score' => $score
 );
 
-if ($studentNumber == "" || $courseNumber == "" || $score == "") {
+if ($studentNumber == "" || $courseName == "" || $score == "") {
     echo "Input can't be empty";
 } else if (strlen($studentNumber) != 13) {
     echo "StudentNumber is wrong";
-} else if (strlen($courseNumber) != 4) {
-    echo "CourseNumber is wrong";
+} else if (strlen($courseName) == "") {
+    echo "CourseName is wrong";
 } else {
     $db = new DB();
     $db->is_login_manager();

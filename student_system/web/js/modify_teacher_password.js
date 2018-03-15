@@ -42,3 +42,7 @@ function keyOK(){
     if (event.keyCode==13)   //回车键的键值为13
         $("#OK").click();  //调用查询按钮的登录事件
 }
+
+$("#back").click(function(){
+    window.history.back();
+})
