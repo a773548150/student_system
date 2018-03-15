@@ -16,7 +16,7 @@ function login(event) {
             success: function (data, status) {
                 console.log(data);
                 if (data == 1) {
-                    $.cookie("username", username, { path: '/', secure: false });
+                    $.cookie("teacherUsername", username, { path: '/', secure: false });
                     window.location = "/web/teacher.html";
                 } else if(data == 2) {
                     alert("已经登录");

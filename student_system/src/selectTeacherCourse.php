@@ -17,6 +17,6 @@ if ($message == "") {
 } else {
     $db = new DB();
     $db->is_login_teacher();
-    $res = $db->select_teacher($message);
+    $res = $db->select_teacher($message);// 查询教师信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
     echo json_encode($res);
 }

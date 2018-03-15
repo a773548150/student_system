@@ -270,6 +270,36 @@ class DB {
         return $content;
     }
 
+    // 查询未被任课课程信息，通过课程名与课程号模糊搜索，查询出课程号，课程名
+    public function select_not_course() {
+        $content = array();
+        $query = "select course_id, number, name from t_course left join t_teacher_course on t_course.id = t_teacher_course.course_id and t_course.`status` =1";
+        $res = $this->db_query($query);
+        while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
+            $content[] = $row;
+        }
+
+        return $content;
+    }
+    // 教师任课
+    public function insert_teacher_course($message) {
+        session_start();
+        // 通过课程号查询得到课程的id
+        $query1 = "select id from t_course where number = '{$message}'";
+        $res1 = $this->db_query($query1);
+        $row1 = $res1->fetch_object();
+        $courseId = $row1->id;
+        // 再通过教师账号查询得到教师的id
+        $query2 = "select id from t_teacher where username = '{$_SESSION['teacherName']}'";
+        $res2 = $this->db_query($query2);
+        $row2 = $res2->fetch_object();
+        $teacherId = $row2->id;
+
+        $query = "insert into t_teacher_course(teacher_id, course_id, create_time) values('{$teacherId}', '{$courseId}', '{$this->currentTime}')";
+        $this->db_query($query);
+        return mysqli_affected_rows($this->mysqli);
+    }
+
     // 查询所有课程名并返回
     public function select_all_course_name() {
         $content = array();

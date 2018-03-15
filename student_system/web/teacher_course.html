@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>教师管理系统</title>
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="common/common.css" rel="stylesheet">
+    <link href="css/teacher_course.css" rel="stylesheet">
+</head>
+<body onkeydown="keySearch();">
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="teacher.html">成绩管理页</a></li>
+    <li role="presentation" class="active"><a href="#">课程管理页</a></li>
+    <li role="presentation"><a href="#" onclick="exitTeacherLogin()">退出登录</a></li>
+    <li role="presentation"><a href="/web/modify_teacher_password.html">修改密码</a></li>
+</ul>
+<h3>任课选择系统</h3>
+<div class="report_card" id="reportCard">
+    <div class="input-group input-group" id="selectName">
+        <span class="input-group-addon" id="sizing-addon1">课程号/课程名</span>
+        <input type="text" class="form-control" id="courseNumber" maxlength="13" v-model="courseMessage.courseMessage" placeholder="请填入课程号/课程名" aria-describedby="sizing-addon1">
+        <button type="button" class="btn btn-default btn" onclick="selectAjax()" aria-label="Left Align" id="search">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+    </div>
+    <table class="table table-hover table-striped">
+        <caption>可选课程列表</caption>
+        <thead>
+        <th width="170">课程号</th>
+        <th width="170">课程名</th>
+        <th colspan="2" width="120">操作</th>
+        </thead>
+        <tbody>
+        <tr v-for="item in courseArr">
+            <td><div class="content">{{item.number}}</div></td>
+            <td><div class="content">{{item.name}}</div></td>
+            <td><a class="btn btn-default" href="javascript:void(0);" v-on:click="insertTeacherCourse(item.number)">任课</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="common/common.js"></script>
+<script src="js/teacher_course.js"></script>
+</body>
+</html>

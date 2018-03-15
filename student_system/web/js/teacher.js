@@ -62,7 +62,7 @@ function selectTitleAjax(){
         url: "/src/selectTeacherCourse.php",
         type: 'post',
         dataType: 'json',
-        data:{"teacherMessage": $.cookie("username")},
+        data:{"teacherMessage": $.cookie("teacherUsername")},
         success: function (data, status) {
             $.each(data,function(index, value){
                 reportCardVm.titleArr.push(value);
@@ -106,6 +106,28 @@ function updateAjax(){
         success: function (data, status) {
             $.bootstrapLoading.end();
             selectAjax();
+        },
+        fail: function (err, status) {
+            console.log(err)
+        }
+    })
+}
+
+//退出登录
+function exitTeacherLogin() {
+    $.ajax({
+        url: "/src/loginExitTeacher.php",
+        type: 'post',
+        dataType: 'json',
+        success: function (data, status) {
+            if (data == 1) {
+                alert("当前没有登录");
+                window.location = "/web/login_teacher.html";
+            } else if(data == 0) {
+                alert("成功退出登录");
+                $.cookie('TeacherUsername', null);
+                window.location = "/web/login_teacher.html";
+            }
         },
         fail: function (err, status) {
             console.log(err)
