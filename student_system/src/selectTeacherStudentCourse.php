@@ -13,6 +13,6 @@ require("./operationMysql.php");
 $message = trim($_POST['courseName']);
 
 $db = new DB();
-$db->is_login_teacher();
-$res = $db->select_teacher_student_course($message);
+$db->isLoginTeacher();
+$res = $db->selectTeacherStudentCourse($message);
 echo json_encode($res);

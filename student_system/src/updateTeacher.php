@@ -26,7 +26,7 @@ if ($name == "" || $number == "" || $username == ""|| $password == "") {
     echo "Number is wrong";
 }else{
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->update_teacher_message($message, $number);
+    $db->isLoginManager();
+    $res = $db->updateTeacherMessage($message, $number);
     printf("%s rows have been update.", $res);
 }

@@ -26,7 +26,7 @@ if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
     echo "Number is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->insert_course_message($message);
+    $db->isLoginManager();
+    $res = $db->insertCourseMessage($message);
     printf("%s rows have been insert.", $res);
 }

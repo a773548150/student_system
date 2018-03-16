@@ -29,7 +29,7 @@ class DB {
     }
 
     // 当请求正确时，res被赋值为0
-    public function db_query($sql) {
+    private function __dbQuery($sql) {
         $res = mysqli_query($this->mysqli, $sql);
         if (!$res) {
            printf("SQL statement execution failure.<br />");
@@ -40,9 +40,9 @@ class DB {
     }
 
     // 登录管理员账号，成功返回true，失败返回false
-    public function login_manager($username, $password) {
+    public function loginManager($username, $password) {
         $query = "select * from t_manager where username = '{$username}' and password = '{$password}'";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         if (mysqli_num_rows($res) > 0) {
             return true;
         } else {
@@ -51,9 +51,9 @@ class DB {
     }
 
     // 登录老师账号，成功返回true，失败返回false
-    public function login_teacher($username, $password) {
+    public function loginTeacher($username, $password) {
         $query = "select * from t_teacher where username = '{$username}' and password = '{$password}'";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         if (mysqli_num_rows($res) > 0) {
             return true;
         } else {
@@ -62,7 +62,7 @@ class DB {
     }
 
     // 判断是否登录管理员，已经登录返回true，未登录返回unlogin
-    public function is_login_manager() {
+    public function isLoginManager() {
         session_start();
         //未登录返回1
         if (! isset($_SESSION['username'])) {
@@ -74,7 +74,7 @@ class DB {
     }
 
     // 判断是否登录老师，已经登录返回true，未登录返回unlogin
-    public function is_login_teacher() {
+    public function isLoginTeacher() {
         session_start();
         if (! isset($_SESSION['teacherName'])) {
             echo "unloginTeacher";
@@ -85,12 +85,12 @@ class DB {
     }
 
     // 修改管理员密码，修改完自动登录
-    public function update_manager_password($username, $oldPassword, $newPassword) {
+    public function updateManagerPassword($username, $oldPassword, $newPassword) {
         $query1 = "select * from t_manager where username = '{$username}' and password = '{$oldPassword}'";
-        $res = $this->db_query($query1);
+        $res = $this->__dbQuery($query1);
         if (mysqli_num_rows($res) > 0) {
             $query2 = "update t_manager set password = '{$newPassword}', update_time = '{$this->currentTime}' where username = '{$username}'";
-            $this->db_query($query2);
+            $this->__dbQuery($query2);
             // 修改密码成功返回2，失败返回1
             if (mysqli_affected_rows($this->mysqli) > 0) {
                 return 2;
@@ -104,12 +104,12 @@ class DB {
     }
 
     // 修改老师密码，修改完自动登录
-    public function update_teacher_password($username, $oldPassword, $newPassword) {
+    public function updateTeacherPassword($username, $oldPassword, $newPassword) {
         $query1 = "select * from t_teacher where username = '{$username}' and password = '{$oldPassword}'";
-        $res = $this->db_query($query1);
+        $res = $this->__dbQuery($query1);
         if (mysqli_num_rows($res) > 0) {
             $query2 = "update t_teacher set password = '{$newPassword}', update_time = '{$this->currentTime}' where username = '{$username}'";
-            $this->db_query($query2);
+            $this->__dbQuery($query2);
             // 修改密码成功返回2，失败返回1
             if (mysqli_affected_rows($this->mysqli) > 0) {
                 return 2;
@@ -123,36 +123,36 @@ class DB {
     }
 
     // 插入学生信息，返回影响的行数
-    public function insert_student_message($message) {
+    public function insertStudentMessage($message) {
         $query = "insert into t_student(number, name, sex, age, major, create_time) values('{$message['number']}', '{$message['name']}', '{$message['sex']}', '{$message['age']}', '{$message['major']}', '{$this->currentTime}')";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 修改学生信息，返回值有错误，只返回0？？
-    public function update_student_message($message, $number) {
+    public function updateStudentMessage($message, $number) {
 
         foreach($message as $key => $item) {
             $query = "update t_student set $key='{$item}', update_time='{$this->currentTime}' where number = '{$number}'";
-            $this->db_query($query);
+            $this->__dbQuery($query);
         }
 
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 删除学生信息，进行假删除，把学生状态status改为0
-    public function delete_student_message($number) {
+    public function deleteStudentMessage($number) {
         $query = "update t_student set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
-        $this->db_query($query);
+        $this->__dbQuery($query);
 
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 查询学生信息，通过模糊搜索姓名或学号，查询出学号，姓名，性别，年龄，专业，状态
-    public function select_student($message) {
+    public function selectStudent($message) {
         $content = array();
         $query = "select number, name, sex, age, major, status from t_student where (name like '%{$message}%' or number like '%{$message}%') and status = 1";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -160,39 +160,39 @@ class DB {
     }
 
     // 插入教师信息，返回影响的行数
-    public function insert_teacher_message($message) {
+    public function insertTeacherMessage($message) {
         $query = "insert into t_teacher(number, name, username, password, create_time) values('{$message['number']}', '{$message['name']}', '{$message['username']}', '{$message['password']}',  '{$this->currentTime}')";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 修改教师信息，返回值有错误，只返回0？？
-    public function update_teacher_message($message, $number) {
+    public function updateTeacherMessage($message, $number) {
 
         foreach($message as $key => $item) {
             $query = "update t_teacher set $key='{$item}', update_time='{$this->currentTime}' where number = '{$number}'";
-            $this->db_query($query);
+            $this->__dbQuery($query);
         }
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 删除教师信息，进行假删除，把教师状态status改为0
-    public function delete_teacher_message($number) {
+    public function deleteTeacherMessage($number) {
         $query = "update t_teacher set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 查询教师信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
-    public function select_teacher($message) {
+    public function selectTeacher($message) {
         $content = array();
         $count = 0;
         $query = "select id, number, name, username, password, status from t_teacher where (name like '%{$message}%' or username like '%{$message}%' or number like '%{$message}%') and status = 1";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[$count] = $row;
             $query2= "select t_course.`name` course_name from t_course, t_teacher_course where t_teacher_course.teacher_id = '{$row["id"]}' and t_course.id = t_teacher_course.course_id";
-            $res2 = $this->db_query($query2);
+            $res2 = $this->__dbQuery($query2);
             while($row2 =  $res2->fetch_assoc()) {
                 $content[$count]=array_merge_recursive($content[$count],$row2);
             }
@@ -202,13 +202,13 @@ class DB {
     }
 
     // 查询教师管理学生信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
-    public function select_teacher_student_course($message) {
+    public function selectTeacherStudentCourse($message) {
         $content = array();
         $query = "select t_student.number, t_student.name as student_name, t_course.name as course_name,  score from t_student 
                          left outer join t_score on t_student.id=t_score.student_id  
                          left outer join t_course on t_course.id=t_score.course_id 
                          where t_course.`name` = '{$message}'and t_student.status > 0 and t_course.status > 0;";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -216,53 +216,53 @@ class DB {
     }
 
     // 教师修改学生成绩
-    public function update_teacherToScore($message) {
+    public function updateTeacherToScore($message) {
         // 先通过学号查询得到学生id
         $query1 = "select id from t_student where number = '{$message['studentNumber']}'";
-        $res1 = $this->db_query($query1);
+        $res1 = $this->__dbQuery($query1);
         $row1 = $res1->fetch_object();
         $studentId = $row1->id;
         // 再通过课程名查询得到课程的id
         $query2 = "select id from t_course where name = '{$message['courseName']}'";
-        $res2 = $this->db_query($query2);
+        $res2 = $this->__dbQuery($query2);
         $row2 = $res2->fetch_object();
         $courseId = $row2->id;
 
         $query = "update t_score set score = '{$message['score']}', update_time='{$this->currentTime}' where course_id = '{$courseId}' and student_id = '{$studentId}'";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 插入课程信息
-    public function insert_course_message($message) {
+    public function insertCourseMessage($message) {
         $query = "insert into t_course(number, name, credit, start_time, create_time) values('{$message['number']}', '{$message['name']}', '{$message['credit']}', '{$message['start_time']}', '{$this->currentTime}')";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 修改课程信息
-    public function update_course_message($message) {
+    public function updateCourseMessage($message) {
         foreach ($message as $key => $item) {
             $query = "update t_course set $key='{$item}', update_time='{$this->currentTime}' where number = '{$message['number']}'";
-            $this->db_query($query);
+            $this->__dbQuery($query);
         }
 
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 删除课程信息
-    public function delete_course_message($number) {
+    public function deleteCourseMessage($number) {
         $query = "update t_course set delete_time='{$this->currentTime}', status='0' where number='{$number}'";
-        $this->db_query($query);
+        $this->__dbQuery($query);
 
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 查询课程信息，通过课程名与课程号模糊搜索，查询出课程号，课程名，学分，开课时间，状态
-    public function select_course($message) {
+    public function selectCourse($message) {
         $content = array();
         $query = "select number, name, credit, start_time, status from t_course where (name like '%{$message}%' or number like '%{$message}%') and status=1";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -271,10 +271,10 @@ class DB {
     }
 
     // 查询未被任课课程信息，通过课程名与课程号模糊搜索，查询出课程号，课程名
-    public function select_not_course() {
+    public function selectNotCourse() {
         $content = array();
         $query = "select course_id, number, name from t_course left join t_teacher_course on t_course.id = t_teacher_course.course_id and t_course.`status` =1";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -282,29 +282,29 @@ class DB {
         return $content;
     }
     // 教师任课
-    public function insert_teacher_course($message) {
+    public function insertTeacherCourse($message) {
         session_start();
         // 通过课程号查询得到课程的id
         $query1 = "select id from t_course where number = '{$message}'";
-        $res1 = $this->db_query($query1);
+        $res1 = $this->__dbQuery($query1);
         $row1 = $res1->fetch_object();
         $courseId = $row1->id;
         // 再通过教师账号查询得到教师的id
         $query2 = "select id from t_teacher where username = '{$_SESSION['teacherName']}'";
-        $res2 = $this->db_query($query2);
+        $res2 = $this->__dbQuery($query2);
         $row2 = $res2->fetch_object();
         $teacherId = $row2->id;
 
         $query = "insert into t_teacher_course(teacher_id, course_id, create_time) values('{$teacherId}', '{$courseId}', '{$this->currentTime}')";
-        $this->db_query($query);
+        $this->__dbQuery($query);
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 查询所有课程名并返回
-    public function select_all_course_name() {
+    public function selectAllCourseName() {
         $content = array();
         $query = "select name from t_course";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -313,29 +313,29 @@ class DB {
     }
 
     // 插入成绩，通过学号与课程名查询对应的id，再插入成绩表中
-    public function insert_score($message) {
+    public function insertScore($message) {
         // 先通过学号查询得到学生id
         $query1 = "select id from t_student where number = '{$message['studentNumber']}'";
-        $res1 = $this->db_query($query1);
+        $res1 = $this->__dbQuery($query1);
         $row1 = $res1->fetch_object();
         $studentId = $row1->id;
         // 再通过课程号查询得到课程的id
         $query2 = "select id from t_course where name = '{$message['courseName']}'";
-        $res2 = $this->db_query($query2);
+        $res2 = $this->__dbQuery($query2);
         $row2 = $res2->fetch_object();
         $courseId = $row2->id;
         // 最后通过学生id和课程id还有成绩插入成绩表中
         $query3 = "insert into t_score(student_id, course_id, score, create_time) values('{$studentId}', '{$courseId}', '{$message['score']}', '{$this->currentTime}')";
-        $this->db_query($query3);
+        $this->__dbQuery($query3);
 
         return mysqli_affected_rows($this->mysqli);
     }
 
     // 查询成绩，先建立临时表，再查询出学号，姓名，课程名，成绩
-    public function select_score($message) {
+    public function selectScore($message) {
         $content = array();
         $queryDropTmp = "drop table if exists tmp_table;";
-        $this->db_query($queryDropTmp);
+        $this->__dbQuery($queryDropTmp);
         // 创建临时表tmp_table，将t_student,t_course,t_score连接起来存入临时表中
         $queryTmp = "create temporary table tmp_table 
                          select t_student.number, t_student.name as student_name, t_course.name as course_name,  score from t_student 
@@ -343,9 +343,9 @@ class DB {
                          left outer join t_course on t_course.id=t_score.course_id 
                          where t_student.number like '%{$message}%' and t_student.status > 0 and t_course.status > 0
                          order by t_student.number;";
-        $this->db_query($queryTmp);
+        $this->__dbQuery($queryTmp);
         $query = "select * from tmp_table;";
-        $res = $this->db_query($query);
+        $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;
         }
@@ -399,7 +399,7 @@ class DB {
                 $currentTime = date("Y-m-d H:i:s");
                 //null 为主键id，自增可用null表示自动添加
                 $sql = "insert into t_student(number, name, sex, age, major, create_time) values('{$number}', '{$name}', '{$sex}', '{$age}', '{$major}', '{$currentTime}')";
-                $res = $this->db_query($sql);;
+                $res = $this->__dbQuery($sql);;
                 if ($res) {
 
                 }else{

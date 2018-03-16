@@ -8,9 +8,7 @@
 
 require("./operationMysql.php");
 
-$message = trim($_POST['courseMessage']);
-
 $db = new DB();
-$db->is_login_teacher();
-$res = $db->select_not_course($message);
+$db->isLoginTeacher();
+$res = $db->selectNotCourse();
 echo json_encode($res);

@@ -30,8 +30,8 @@ if ($name == "" || $number == "" || $sex == ""|| $age == ""|| $major == "") {
     echo "Age is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->insert_student_message($message);
+    $db->isLoginManager();
+    $res = $db->insertStudentMessage($message);
     printf("%s rows have been insert.", $res);
 }
 

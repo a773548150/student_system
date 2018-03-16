@@ -8,6 +8,6 @@
 
 require("./operationMysql.php");
 $db = new DB();
-$db->is_login_manager();
+$db->isLoginManager();
 //调用
 $db->upExecel();

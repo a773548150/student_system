@@ -27,8 +27,8 @@ if ($name == "" || $number == "" || $username == ""|| $password == "") {
     echo "Number is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->insert_teacher_message($message);
+    $db->isLoginManager();
+    $res = $db->insertTeacherMessage($message);
     printf("%s rows have been insert.", $res);
 }
 

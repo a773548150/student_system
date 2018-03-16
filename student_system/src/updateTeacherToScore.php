@@ -23,7 +23,7 @@ if ($studentNumber == "" || $courseName == "" || $score == "") {
     echo "Input can't be empty";
 } else{
     $db = new DB();
-    $db->is_login_teacher();
-    $res = $db->update_teacherToScore($message);
+    $db->isLoginTeacher();
+    $res = $db->updateTeacherToScore($message);
     printf("%s rows have been update.", $res);
 }

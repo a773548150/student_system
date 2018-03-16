@@ -14,7 +14,7 @@ if (strlen($number) != 4) {
     echo "Number is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->delete_course_message($number);
+    $db->isLoginManager();
+    $res = $db->deleteCourseMessage($number);
     printf("%s rows have been delete.", $res);
 }

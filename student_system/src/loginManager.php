@@ -15,7 +15,7 @@ if (! isset($_SESSION['username'])) {
         $username = trim($_POST['username']);
         $password = trim(md5($_POST['password']));
         $db = new DB();
-        $res = $db->login_manager($username, $password);
+        $res = $db->loginManager($username, $password);
         // 登录成功则把username存入session中并返回1，失败返回0
         if ($res != FALSE) {
             $_SESSION['username'] = $username;

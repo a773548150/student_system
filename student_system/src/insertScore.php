@@ -26,7 +26,7 @@ if ($studentNumber == "" || $courseName == "" || $score == "") {
     echo "CourseName is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->insert_score($message);
+    $db->isLoginManager();
+    $res = $db->insertScore($message);
     printf("%s rows have been insert.", $res);
 }

@@ -26,7 +26,7 @@ if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
     echo "Number is wrong";
 } else {
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->update_course_message($message);
+    $db->isLoginManager();
+    $res = $db->updateCourseMessage($message);
     printf("%s rows have been update.", $res);
 }

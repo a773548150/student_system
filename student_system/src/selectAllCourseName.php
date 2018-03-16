@@ -9,6 +9,6 @@
 require("./operationMysql.php");
 
 $db = new DB();
-$db->is_login_manager();
-$res = $db->select_all_course_name();
+$db->isLoginManager();
+$res = $db->selectAllCourseName();
 echo json_encode($res);

@@ -107,7 +107,7 @@ $("#inputScore").blur(function(){
 $(document).ready(function(){
     var obj = $("#courseNameSelect");
     $.ajax({
-        url: "/src/select_all_course_name.php",
+        url: "/src/selectAllCourseName.php",
         type: 'post',
         success: function (data, status) {
             $.each(JSON.parse(data),function(index, value) {

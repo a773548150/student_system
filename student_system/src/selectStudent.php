@@ -11,6 +11,6 @@ require("./operationMysql.php");
 $message = trim($_POST['studentMessage']);
 
 $db = new DB();
-$db->is_login_manager();
-$res = $db->select_student($message);
+$db->isLoginManager();
+$res = $db->selectStudent($message);
 echo json_encode($res);

@@ -30,7 +30,7 @@ if ($name == "" || $number == "" || $sex == ""|| $age == ""|| $major == "") {
     echo "Age is wrong";
 } else{
     $db = new DB();
-    $db->is_login_manager();
-    $res = $db->update_student_message($message, $number);
+    $db->isLoginManager();
+    $res = $db->updateStudentMessage($message, $number);
     printf("%s rows have been update.", $res);
 }

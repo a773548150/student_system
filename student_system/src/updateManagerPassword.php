@@ -16,7 +16,7 @@ if ($username == "" || $oldPassword == "" || $newPassword == "") {
     echo "Input can't be empty";
 } else {
     $db = new DB();
-    $res = $db->update_manager_password($username, $oldPassword, $newPassword);
+    $res = $db->updateManagerPassword($username, $oldPassword, $newPassword);
     if ($res === 0) {
         echo "0"; // 账号或密码错误
     } else if ($res === 1) {

@@ -15,7 +15,7 @@ if ($number == "") {
     echo "Input can't be empty";
 } else {
     $db = new DB();
-    $db->is_login_teacher();
-    $res = $db->insert_teacher_course($number);
+    $db->isLoginTeacher();
+    $res = $db->insertTeacherCourse($number);
     printf("%s rows have been insert.", $res);
 }
