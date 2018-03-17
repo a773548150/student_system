@@ -16,5 +16,5 @@ if (strlen($number) != 4) {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->deleteCourseMessage($number);
-    printf("%s rows have been delete.", $res);
+    echo $res;
 }

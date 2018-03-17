@@ -180,9 +180,9 @@ function selectAjax(){
             $.each(data,function(index, value){
                 value.sex = (value.sex == 1 || value.sex == "男") ? "男":"女";
                 if (value.status != false) {
-                    reportCardVm.storeAge.unshift(value.age); // 存储Y-m-d格式的年龄到storeAge中
+                    reportCardVm.storeAge.push(value.age); // 存储Y-m-d格式的年龄到storeAge中
                     value.age = toAge(value.age);
-                    reportCardVm.studyArr.unshift(value);
+                    reportCardVm.studyArr.push(value);
                 }
             });
             $.bootstrapLoading.end();
@@ -191,7 +191,7 @@ function selectAjax(){
             window.location = "/web/login.html";
             console.log(err)
         }
-    })
+    });
 }
 
 function insertAjax(){
@@ -202,6 +202,9 @@ function insertAjax(){
         data: reportCardVm.insertArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if(data != 1) {
+                alert("录入失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {
@@ -218,6 +221,9 @@ function updateAjax(){
         data: reportCardVm.editArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if (data == 0) {
+               alert("没有数据可修改");
+            }
             selectAjax();
         },
         fail: function (err, status) {
@@ -234,6 +240,9 @@ function deleteAjax(number){
         data: {'number': number},
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if (data != 1){
+                alert("删除失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {

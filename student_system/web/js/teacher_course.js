@@ -35,6 +35,7 @@ function selectAjax(){
         dataType: 'json',
         data:{"courseMessage": reportCardVm.courseMessage.courseMessage}, // 数据为vue的绑定数据
         success: function (data, status) {
+            // 判断是否登录
             if(data == "1") {
                 window.location = "/web/login.html";
             }
@@ -84,6 +85,9 @@ function insertTeacherCourseAjax(number){
         data: {'number': number},
         success: function (data, Cstatus) {
             $.bootstrapLoading.end();
+            if(data != 1) {
+                alert("任课失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {

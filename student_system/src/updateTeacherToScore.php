@@ -25,5 +25,5 @@ if ($studentNumber == "" || $courseName == "" || $score == "") {
     $db = new DB();
     $db->isLoginTeacher();
     $res = $db->updateTeacherToScore($message);
-    printf("%s rows have been update.", $res);
+    echo $res;
 }

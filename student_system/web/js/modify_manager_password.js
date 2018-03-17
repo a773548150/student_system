@@ -47,4 +47,21 @@ function keyOK(){
 
 $("#back").click(function(){
     window.history.back();
-})
+});
+
+$(".inputNewPsswordHide").hide();
+$("#eye").click(function(){
+    if ($(".inputNewPssword").attr("id") != "") {
+        $(".inputNewPssword").hide();
+        $(".inputNewPssword").attr("id", "");
+        $(".inputNewPsswordHide").show();
+        $(".inputNewPsswordHide").attr("id", "inputNewPssword");
+        $(".inputNewPsswordHide").val($(".inputNewPssword").val());
+    } else {
+        $(".inputNewPsswordHide").hide();
+        $(".inputNewPsswordHide").attr("id", "");
+        $(".inputNewPssword").show();
+        $(".inputNewPssword").attr("id", "inputNewPssword");
+        $(".inputNewPssword").val($(".inputNewPsswordHide").val());
+    }
+});

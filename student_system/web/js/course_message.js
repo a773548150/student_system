@@ -156,7 +156,7 @@ function selectAjax(){
             $.each(data,function(index, value){
                 if (value.status != false) {
                     value.start_time = value.start_time.slice(0, 16);
-                    reportCardVm.courseArr.unshift(value); // 保存查询数据到courseArr中
+                    reportCardVm.courseArr.push(value); // 保存查询数据到courseArr中
                 }
             });
             $.bootstrapLoading.end(); // loading遮盖层结束
@@ -176,6 +176,9 @@ function insertAjax(){
         data: reportCardVm.insertArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if(data != 1) {
+                alert("录入失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {
@@ -192,6 +195,9 @@ function updateAjax(){
         data: reportCardVm.editArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if (data == 0) {
+                alert("没有数据可修改");
+            }
             selectAjax();
         },
         fail: function (err, status) {
@@ -208,8 +214,10 @@ function deleteAjax(number){
         type: 'post',
         data: {'number': number},
         success: function (data, Cstatus) {
-
             $.bootstrapLoading.end();
+            if (data != 1){
+                alert("删除失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {

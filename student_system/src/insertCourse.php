@@ -28,5 +28,5 @@ if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->insertCourseMessage($message);
-    printf("%s rows have been insert.", $res);
+    echo $res;
 }

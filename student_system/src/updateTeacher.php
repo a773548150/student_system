@@ -28,5 +28,5 @@ if ($name == "" || $number == "" || $username == ""|| $password == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->updateTeacherMessage($message, $number);
-    printf("%s rows have been update.", $res);
+    echo $res;
 }

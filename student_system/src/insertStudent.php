@@ -32,7 +32,7 @@ if ($name == "" || $number == "" || $sex == ""|| $age == ""|| $major == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->insertStudentMessage($message);
-    printf("%s rows have been insert.", $res);
+    echo $res;
 }
 
 

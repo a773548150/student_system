@@ -16,3 +16,7 @@ h3 {
 .nav-tabs > li:nth-child(n+3){
     float: right;
 }
+
+.nav-tabs > li:nth-child(n+3) a{
+    color: #808080;
+}

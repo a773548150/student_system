@@ -105,6 +105,9 @@ function updateAjax(){
         data: reportCardVm.editArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if (data == 0) {
+                alert("没有数据可修改");
+            }
             selectAjax();
         },
         fail: function (err, status) {

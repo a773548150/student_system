@@ -133,10 +133,13 @@ jQuery.bootstrapLoading = {
                     options.sleep);
             }
         }
+        setTimeout(function(){
+            $("#loadingPage").remove();
+        },5000);
     },
     end: function () {
         $("#loadingPage").remove();
-    }
+    },
 }
 
 //退出登录

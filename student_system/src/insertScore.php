@@ -28,5 +28,5 @@ if ($studentNumber == "" || $courseName == "" || $score == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->insertScore($message);
-    printf("%s rows have been insert.", $res);
+    echo $res;
 }

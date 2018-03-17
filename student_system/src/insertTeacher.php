@@ -29,7 +29,7 @@ if ($name == "" || $number == "" || $username == ""|| $password == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->insertTeacherMessage($message);
-    printf("%s rows have been insert.", $res);
+    echo $res;
 }
 
 

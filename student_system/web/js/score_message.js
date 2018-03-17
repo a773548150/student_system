@@ -71,7 +71,7 @@ function selectAjax(){
             }
             console.log(reportCardVm.studyArr);
             $.each(data,function(index, value){
-                reportCardVm.studyArr.unshift(value);
+                reportCardVm.studyArr.push(value);
             });
             $.bootstrapLoading.end();
         },
@@ -89,6 +89,9 @@ function insertAjax(){
         data: reportCardVm.insertArr,
         success: function (data, status) {
             $.bootstrapLoading.end();
+            if(data != 1) {
+                alert("录入失败");
+            }
             selectAjax();
         },
         fail: function (err, status) {

@@ -28,5 +28,5 @@ if ($name == "" || $number == "" || $credit == ""|| $start_time == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->updateCourseMessage($message);
-    printf("%s rows have been update.", $res);
+    echo $res;
 }

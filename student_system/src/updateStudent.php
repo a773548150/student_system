@@ -32,5 +32,5 @@ if ($name == "" || $number == "" || $sex == ""|| $age == ""|| $major == "") {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->updateStudentMessage($message, $number);
-    printf("%s rows have been update.", $res);
+    echo $res;
 }

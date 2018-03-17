@@ -16,5 +16,5 @@ if (strlen($number) != 13) {
     $db = new DB();
     $db->isLoginManager();
     $res = $db->deleteStudentMessage($number);
-    printf("%s rows have been delete.", $res);
+    echo $res;
 }

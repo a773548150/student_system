@@ -17,5 +17,5 @@ if ($number == "") {
     $db = new DB();
     $db->isLoginTeacher();
     $res = $db->insertTeacherCourse($number);
-    printf("%s rows have been insert.", $res);
+    echo $res;
 }
