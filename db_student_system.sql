@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : hiaocong
-Source Server Version : 50721
+Source Server         : localhost
+Source Server Version : 50553
 Source Host           : localhost:3306
 Source Database       : db_student_system
 
 Target Server Type    : MYSQL
-Target Server Version : 50721
+Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2018-03-15 23:01:22
+Date: 2018-03-17 17:25:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,7 +63,7 @@ CREATE TABLE `t_manager` (
 -- ----------------------------
 -- Records of t_manager
 -- ----------------------------
-INSERT INTO `t_manager` VALUES ('1', 'admin', '202cb962ac59075b964b07152d234b70', '0000-00-00 00:00:00', '2018-01-30 09:19:20');
+INSERT INTO `t_manager` VALUES ('1', 'admin', '202cb962ac59075b964b07152d234b70', '0000-00-00 00:00:00', '2018-03-17 16:40:07');
 
 -- ----------------------------
 -- Table structure for t_score
@@ -81,7 +81,7 @@ CREATE TABLE `t_score` (
   KEY `cou_id` (`course_id`) USING BTREE,
   CONSTRAINT `t_score_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `t_student` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `t_score_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='成绩表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='成绩表';
 
 -- ----------------------------
 -- Records of t_score
@@ -97,6 +97,9 @@ INSERT INTO `t_score` VALUES ('14', '12', '2', '89.00', '2018-01-28 22:51:27', '
 INSERT INTO `t_score` VALUES ('16', '12', '8', '86.50', '2018-01-30 14:47:13', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('17', '9', '1', '98.00', '2018-02-02 16:19:31', '0000-00-00 00:00:00');
 INSERT INTO `t_score` VALUES ('18', '5', '8', '88.00', '2018-03-15 14:05:37', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('19', '12', '10', '87.50', '2018-03-17 15:20:41', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('20', '9', '6', '66.00', '2018-03-17 15:25:08', '0000-00-00 00:00:00');
+INSERT INTO `t_score` VALUES ('21', '5', '10', '87.00', '2018-03-17 15:29:31', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for t_student
@@ -115,7 +118,7 @@ CREATE TABLE `t_student` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '假删除状态，1表示正常，0表示假删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COMMENT='学生表';
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 -- ----------------------------
 -- Records of t_student
@@ -148,6 +151,8 @@ INSERT INTO `t_student` VALUES ('41', '1546541848544', '路飞', '1', '1001-01-0
 INSERT INTO `t_student` VALUES ('49', '1514026546875', '林x', '0', '1998-02-01', '网络', '2018-02-02 16:09:54', '0000-00-00 00:00:00', '2018-03-15 13:16:21', '0');
 INSERT INTO `t_student` VALUES ('50', '1514080354868', '小c', '1', '1997-03-26', '软件', '2018-02-02 16:09:54', '0000-00-00 00:00:00', '2018-03-15 13:16:16', '0');
 INSERT INTO `t_student` VALUES ('55', '1514080903138', '陈洁敏', '0', '1995-08-08', '高级数据库', '2018-03-15 08:54:19', '0000-00-00 00:00:00', '2018-03-15 13:16:00', '0');
+INSERT INTO `t_student` VALUES ('56', '1111111111154', 'ss', '0', '2000-01-12', 'sdf', '2018-03-17 16:45:07', '0000-00-00 00:00:00', '2018-03-17 16:52:32', '0');
+INSERT INTO `t_student` VALUES ('57', '5645641521514', '214', '1', '2000-01-06', '1', '2018-03-17 16:47:01', '2018-03-17 16:49:25', '2018-03-17 16:51:39', '0');
 
 -- ----------------------------
 -- Table structure for t_teacher
@@ -165,7 +170,7 @@ CREATE TABLE `t_teacher` (
   `update_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '修改记录时插入当前时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='教师表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='教师表';
 
 -- ----------------------------
 -- Records of t_teacher
@@ -174,7 +179,6 @@ INSERT INTO `t_teacher` VALUES ('1', '151409090123', '张全蛋', '小张', '202
 INSERT INTO `t_teacher` VALUES ('2', '1111111111111', '王尼玛', 'wang', '202cb962ac59075b964b07152d234b70', '1', '0000-00-00 00:00:00', '2018-01-31 16:04:10', '2018-01-31 16:07:19');
 INSERT INTO `t_teacher` VALUES ('3', '1541541854851', '林晓聪', 'a773548150', 'f95579bd0ae8401e0480f7f328f70846', '0', '2018-02-02 16:15:03', '2018-02-02 16:13:44', '2018-02-02 16:14:56');
 INSERT INTO `t_teacher` VALUES ('4', '2222222222222', '白客', 'bai', 'e10adc3949ba59abbe56e057f20f883e', '1', '0000-00-00 00:00:00', '2018-03-15 20:53:34', '0000-00-00 00:00:00');
-INSERT INTO `t_teacher` VALUES ('5', 'A', 'A', 'A', 'A', '1', '0000-00-00 00:00:00', '2018-03-15 22:30:02', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for t_teacher_course
@@ -191,7 +195,7 @@ CREATE TABLE `t_teacher_course` (
   KEY `teacher_id` (`teacher_id`) USING BTREE,
   CONSTRAINT `TC_id` FOREIGN KEY (`course_id`) REFERENCES `t_course` (`id`),
   CONSTRAINT `TT_id` FOREIGN KEY (`teacher_id`) REFERENCES `t_teacher` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='教师与课程的关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='教师与课程的关联表';
 
 -- ----------------------------
 -- Records of t_teacher_course
@@ -205,7 +209,7 @@ INSERT INTO `t_teacher_course` VALUES ('7', '2', '4', '0000-00-00 00:00:00', '00
 INSERT INTO `t_teacher_course` VALUES ('8', '2', '7', '0000-00-00 00:00:00', '2018-03-15 22:33:00');
 
 -- ----------------------------
--- View structure for user
+-- View structure for v_score
 -- ----------------------------
-DROP VIEW IF EXISTS `user`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `user` AS select `t_student`.`number` AS `number`,`t_student`.`name` AS `studenName`,`t_course`.`name` AS `name`,`t_score`.`score` AS `score` from ((`t_student` join `t_course`) join `t_score`) ;
+DROP VIEW IF EXISTS `v_score`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_score` AS select `t_student`.`number` AS `number`,`t_student`.`name` AS `student_name`,`t_course`.`name` AS `course_name`,`t_score`.`score` AS `score` from ((`t_student` left join `t_score` on((`t_student`.`id` = `t_score`.`student_id`))) left join `t_course` on((`t_course`.`id` = `t_score`.`course_id`))) where ((`t_student`.`status` > 0) and (`t_course`.`status` > 0)) order by `t_score`.`id` desc ;

@@ -206,13 +206,10 @@ class DB {
         return $content;
     }
 
-    // 查询教师管理学生信息，通过模糊搜索姓名或学号，查询出编号，姓名，用户名，密码
+    // 查询教师所教的某课的所有学生
     public function selectTeacherStudentCourse($message) {
         $content = array();
-        $query = "select t_student.number, t_student.name as student_name, t_course.name as course_name,  score from t_student 
-                         left outer join t_score on t_student.id=t_score.student_id  
-                         left outer join t_course on t_course.id=t_score.course_id 
-                         where t_course.`name` = '{$message}'and t_student.status > 0 and t_course.status > 0;";
+        $query = "select * from v_score where course_name = '{$message}';";
         $res = $this->__dbQuery($query);
         while ($row = $res->fetch_array(MYSQLI_ASSOC)) {
             $content[] = $row;

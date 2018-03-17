@@ -14,62 +14,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="operationMysql.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="operationMysql.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/operationMysql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="282" column="27" lean-forward="true" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
+            <state relative-caret-position="-5015">
+              <caret line="211" column="71" lean-forward="false" selection-start-line="211" selection-start-column="71" selection-end-line="211" selection-end-column="71" />
               <folding>
-                <marker date="1521277931391" expanded="true" signature="1251:1334" ph="select * fro... t_manager" />
-                <marker date="1521277931391" expanded="true" signature="1613:1696" ph="select * fro... t_teacher" />
-                <marker date="1521277931391" expanded="true" signature="2528:2614" ph="select * fro... t_manager" />
-                <marker date="1521277931391" expanded="true" signature="2724:2841" ph="update t_manager... " />
-                <marker date="1521277931391" expanded="true" signature="3263:3349" ph="select * fro... t_teacher" />
-                <marker date="1521277931391" expanded="true" signature="3459:3576" ph="update t_teacher... " />
-                <marker date="1521277931391" expanded="true" signature="3967:4197" ph="insert into t_student... " />
-                <marker date="1521277931391" expanded="true" signature="4456:4554" ph="update t_student... " />
-                <marker date="1521277931391" expanded="true" signature="4800:4892" ph="update t_student... " />
-                <marker date="1521277931391" expanded="true" signature="5128:5265" ph="select numbe... t_student" />
-                <marker date="1521277931391" expanded="true" signature="5128:5275" ph="select numbe... t_student" />
-                <marker date="1521277931391" expanded="true" signature="5128:5282" ph="select numbe... t_student" />
-                <marker date="1521277931391" expanded="true" signature="5549:5770" ph="insert into t_teacher... " />
-                <marker date="1521277931391" expanded="true" signature="6029:6127" ph="update t_teacher... " />
-                <marker date="1521277931391" expanded="true" signature="6372:6464" ph="update t_teacher... " />
-                <marker date="1521277931391" expanded="true" signature="6714:6913" ph="select id, n... t_teacher" />
-                <marker date="1521277931391" expanded="true" signature="6714:6930" ph="select id, n... t_teacher" />
-                <marker date="1521277931391" expanded="true" signature="7090:7252" ph="select t_cou... t_course" />
-                <marker date="1521277931391" expanded="true" signature="7662:8051" ph="select t_stu... t_student" />
-                <marker date="1521277931391" expanded="true" signature="8339:8408" ph="select id fr... t_student" />
-                <marker date="1521277931391" expanded="true" signature="8571:8634" ph="select id fr... t_course" />
-                <marker date="1521277931391" expanded="true" signature="8769:8917" ph="update t_score... " />
-                <marker date="1521277931391" expanded="true" signature="9097:9316" ph="insert into t_course... " />
-                <marker date="1521277931391" expanded="true" signature="9566:9674" ph="update t_course... " />
-                <marker date="1521277931391" expanded="true" signature="9898:9989" ph="update t_course... " />
-                <marker date="1521277931391" expanded="true" signature="10227:10364" ph="select numbe... t_course" />
-                <marker date="1521277931391" expanded="true" signature="10227:10381" ph="select numbe... t_course" />
-                <marker date="1521277931391" expanded="true" signature="10685:10828" ph="select cours... t_course" />
-                <marker date="1521277931391" expanded="true" signature="11136:11187" ph="select id fr... t_course" />
-                <marker date="1521277931391" expanded="true" signature="11350:11420" ph="select id fr... t_teacher" />
-                <marker date="1521277931391" expanded="true" signature="11556:11682" ph="insert into t_teacher_course... " />
-                <marker date="1521277931391" expanded="true" signature="11886:11911" ph="select name t_course" />
-                <marker date="1521277931391" expanded="true" signature="11886:11928" ph="select name t_course" />
-                <marker date="1521277931391" expanded="true" signature="12227:12296" ph="select id fr... t_student" />
-                <marker date="1521277931391" expanded="true" signature="12459:12522" ph="select id fr... t_course" />
-                <marker date="1521277931391" expanded="true" signature="12692:12839" ph="insert into t_score... " />
-                <marker date="1521277931391" expanded="true" signature="13070:13100" ph="drop table i... " />
-                <marker date="1521277931391" expanded="true" signature="13224:13265" ph="select * fro... v_score" />
-                <marker date="1521277931391" expanded="true" signature="13224:13276" ph="select * fro... v_score" />
-                <marker date="1521277931391" expanded="true" signature="13224:13277" ph="select * fro... v_score" />
-                <marker date="1521277931391" expanded="true" signature="15739:15885" ph="insert into t_student... " />
+                <marker date="1521278631050" expanded="true" signature="1251:1334" ph="select * fro... t_manager" />
+                <marker date="1521278631050" expanded="true" signature="1613:1696" ph="select * fro... t_teacher" />
+                <marker date="1521278631050" expanded="true" signature="2528:2614" ph="select * fro... t_manager" />
+                <marker date="1521278631050" expanded="true" signature="2724:2841" ph="update t_manager... " />
+                <marker date="1521278631050" expanded="true" signature="3263:3349" ph="select * fro... t_teacher" />
+                <marker date="1521278631050" expanded="true" signature="3459:3576" ph="update t_teacher... " />
+                <marker date="1521278631050" expanded="true" signature="3967:4197" ph="insert into t_student... " />
+                <marker date="1521278631050" expanded="true" signature="4456:4554" ph="update t_student... " />
+                <marker date="1521278631050" expanded="true" signature="4800:4892" ph="update t_student... " />
+                <marker date="1521278631050" expanded="true" signature="5128:5265" ph="select numbe... t_student" />
+                <marker date="1521278631050" expanded="true" signature="5128:5275" ph="select numbe... t_student" />
+                <marker date="1521278631050" expanded="true" signature="5128:5282" ph="select numbe... t_student" />
+                <marker date="1521278631050" expanded="true" signature="5549:5770" ph="insert into t_teacher... " />
+                <marker date="1521278631050" expanded="true" signature="6029:6127" ph="update t_teacher... " />
+                <marker date="1521278631050" expanded="true" signature="6372:6464" ph="update t_teacher... " />
+                <marker date="1521278631050" expanded="true" signature="6714:6913" ph="select id, n... t_teacher" />
+                <marker date="1521278631050" expanded="true" signature="6714:6930" ph="select id, n... t_teacher" />
+                <marker date="1521278631050" expanded="true" signature="7090:7252" ph="select t_cou... t_course" />
+                <marker date="1521278631050" expanded="true" signature="7638:7692" ph="select * fro... v_score" />
+                <marker date="1521278631050" expanded="true" signature="7660:7692" ph="select t_stu... t_student" />
+                <marker date="1521278631050" expanded="true" signature="7980:8049" ph="select id fr... t_student" />
+                <marker date="1521278631050" expanded="true" signature="8212:8275" ph="select id fr... t_course" />
+                <marker date="1521278631050" expanded="true" signature="8410:8558" ph="update t_score... " />
+                <marker date="1521278631050" expanded="true" signature="8738:8957" ph="insert into t_course... " />
+                <marker date="1521278631050" expanded="true" signature="9207:9315" ph="update t_course... " />
+                <marker date="1521278631050" expanded="true" signature="9539:9630" ph="update t_course... " />
+                <marker date="1521278631050" expanded="true" signature="9868:10005" ph="select numbe... t_course" />
+                <marker date="1521278631050" expanded="true" signature="9868:10022" ph="select numbe... t_course" />
+                <marker date="1521278631050" expanded="true" signature="10326:10469" ph="select cours... t_course" />
+                <marker date="1521278631050" expanded="true" signature="10777:10828" ph="select id fr... t_course" />
+                <marker date="1521278631050" expanded="true" signature="10991:11061" ph="select id fr... t_teacher" />
+                <marker date="1521278631050" expanded="true" signature="11197:11323" ph="insert into t_teacher_course... " />
+                <marker date="1521278631050" expanded="true" signature="11527:11552" ph="select name t_course" />
+                <marker date="1521278631050" expanded="true" signature="11527:11569" ph="select name t_course" />
+                <marker date="1521278631050" expanded="true" signature="11868:11937" ph="select id fr... t_student" />
+                <marker date="1521278631050" expanded="true" signature="12100:12163" ph="select id fr... t_course" />
+                <marker date="1521278631050" expanded="true" signature="12333:12480" ph="insert into t_score... " />
+                <marker date="1521278631050" expanded="true" signature="12711:12741" ph="drop table i... " />
+                <marker date="1521278631050" expanded="true" signature="12865:12906" ph="select * fro... v_score" />
+                <marker date="1521278631050" expanded="true" signature="12865:12917" ph="select * fro... v_score" />
+                <marker date="1521278631050" expanded="true" signature="12865:12918" ph="select * fro... v_score" />
+                <marker date="1521278631050" expanded="true" signature="15380:15526" ph="insert into t_student... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="teacher_course.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="teacher_course.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/css/teacher_course.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
+            <state relative-caret-position="243">
               <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
               <folding />
             </state>
@@ -81,6 +82,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
               <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selectTeacherStudentCourse.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/selectTeacherStudentCourse.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -250,8 +261,8 @@
         <option value="$PROJECT_DIR$/src/insertScore.php" />
         <option value="$PROJECT_DIR$/web/js/score_message.js" />
         <option value="$PROJECT_DIR$/web/js/teacher_course.js" />
-        <option value="$PROJECT_DIR$/src/operationMysql.php" />
         <option value="$PROJECT_DIR$/web/css/teacher_course.css" />
+        <option value="$PROJECT_DIR$/src/operationMysql.php" />
       </list>
     </option>
   </component>
@@ -263,8 +274,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="217" />
-    <option name="y" value="286" />
+    <option name="x" value="267" />
+    <option name="y" value="94" />
     <option name="width" value="1490" />
     <option name="height" value="730" />
   </component>
@@ -393,16 +404,15 @@
       <workItem from="1520939583848" duration="1215000" />
       <workItem from="1521071068045" duration="22439000" />
       <workItem from="1521207567704" duration="1616000" />
-      <workItem from="1521269111170" duration="8864000" />
+      <workItem from="1521269111170" duration="9552000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="248826000" />
+    <option name="totallyTimeSpent" value="249514000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="217" y="286" width="1490" height="730" extended-state="0" />
-    <editor active="true" />
+    <frame x="267" y="94" width="1490" height="730" extended-state="0" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25983718" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -512,14 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/selectTeacherStudentCourse.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,56 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/operationMysql.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="282" column="27" lean-forward="true" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
-          <folding>
-            <marker date="1521277931391" expanded="true" signature="1251:1334" ph="select * fro... t_manager" />
-            <marker date="1521277931391" expanded="true" signature="1613:1696" ph="select * fro... t_teacher" />
-            <marker date="1521277931391" expanded="true" signature="2528:2614" ph="select * fro... t_manager" />
-            <marker date="1521277931391" expanded="true" signature="2724:2841" ph="update t_manager... " />
-            <marker date="1521277931391" expanded="true" signature="3263:3349" ph="select * fro... t_teacher" />
-            <marker date="1521277931391" expanded="true" signature="3459:3576" ph="update t_teacher... " />
-            <marker date="1521277931391" expanded="true" signature="3967:4197" ph="insert into t_student... " />
-            <marker date="1521277931391" expanded="true" signature="4456:4554" ph="update t_student... " />
-            <marker date="1521277931391" expanded="true" signature="4800:4892" ph="update t_student... " />
-            <marker date="1521277931391" expanded="true" signature="5128:5265" ph="select numbe... t_student" />
-            <marker date="1521277931391" expanded="true" signature="5128:5275" ph="select numbe... t_student" />
-            <marker date="1521277931391" expanded="true" signature="5128:5282" ph="select numbe... t_student" />
-            <marker date="1521277931391" expanded="true" signature="5549:5770" ph="insert into t_teacher... " />
-            <marker date="1521277931391" expanded="true" signature="6029:6127" ph="update t_teacher... " />
-            <marker date="1521277931391" expanded="true" signature="6372:6464" ph="update t_teacher... " />
-            <marker date="1521277931391" expanded="true" signature="6714:6913" ph="select id, n... t_teacher" />
-            <marker date="1521277931391" expanded="true" signature="6714:6930" ph="select id, n... t_teacher" />
-            <marker date="1521277931391" expanded="true" signature="7090:7252" ph="select t_cou... t_course" />
-            <marker date="1521277931391" expanded="true" signature="7662:8051" ph="select t_stu... t_student" />
-            <marker date="1521277931391" expanded="true" signature="8339:8408" ph="select id fr... t_student" />
-            <marker date="1521277931391" expanded="true" signature="8571:8634" ph="select id fr... t_course" />
-            <marker date="1521277931391" expanded="true" signature="8769:8917" ph="update t_score... " />
-            <marker date="1521277931391" expanded="true" signature="9097:9316" ph="insert into t_course... " />
-            <marker date="1521277931391" expanded="true" signature="9566:9674" ph="update t_course... " />
-            <marker date="1521277931391" expanded="true" signature="9898:9989" ph="update t_course... " />
-            <marker date="1521277931391" expanded="true" signature="10227:10364" ph="select numbe... t_course" />
-            <marker date="1521277931391" expanded="true" signature="10227:10381" ph="select numbe... t_course" />
-            <marker date="1521277931391" expanded="true" signature="10685:10828" ph="select cours... t_course" />
-            <marker date="1521277931391" expanded="true" signature="11136:11187" ph="select id fr... t_course" />
-            <marker date="1521277931391" expanded="true" signature="11350:11420" ph="select id fr... t_teacher" />
-            <marker date="1521277931391" expanded="true" signature="11556:11682" ph="insert into t_teacher_course... " />
-            <marker date="1521277931391" expanded="true" signature="11886:11911" ph="select name t_course" />
-            <marker date="1521277931391" expanded="true" signature="11886:11928" ph="select name t_course" />
-            <marker date="1521277931391" expanded="true" signature="12227:12296" ph="select id fr... t_student" />
-            <marker date="1521277931391" expanded="true" signature="12459:12522" ph="select id fr... t_course" />
-            <marker date="1521277931391" expanded="true" signature="12692:12839" ph="insert into t_score... " />
-            <marker date="1521277931391" expanded="true" signature="13070:13100" ph="drop table i... " />
-            <marker date="1521277931391" expanded="true" signature="13224:13265" ph="select * fro... v_score" />
-            <marker date="1521277931391" expanded="true" signature="13224:13276" ph="select * fro... v_score" />
-            <marker date="1521277931391" expanded="true" signature="13224:13277" ph="select * fro... v_score" />
-            <marker date="1521277931391" expanded="true" signature="15739:15885" ph="insert into t_student... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/css/teacher.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -874,9 +826,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/css/teacher_course.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="243">
           <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/selectTeacherStudentCourse.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="8" column="8" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/operationMysql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5015">
+          <caret line="211" column="71" lean-forward="false" selection-start-line="211" selection-start-column="71" selection-end-line="211" selection-end-column="71" />
+          <folding>
+            <marker date="1521278631050" expanded="true" signature="1251:1334" ph="select * fro... t_manager" />
+            <marker date="1521278631050" expanded="true" signature="1613:1696" ph="select * fro... t_teacher" />
+            <marker date="1521278631050" expanded="true" signature="2528:2614" ph="select * fro... t_manager" />
+            <marker date="1521278631050" expanded="true" signature="2724:2841" ph="update t_manager... " />
+            <marker date="1521278631050" expanded="true" signature="3263:3349" ph="select * fro... t_teacher" />
+            <marker date="1521278631050" expanded="true" signature="3459:3576" ph="update t_teacher... " />
+            <marker date="1521278631050" expanded="true" signature="3967:4197" ph="insert into t_student... " />
+            <marker date="1521278631050" expanded="true" signature="4456:4554" ph="update t_student... " />
+            <marker date="1521278631050" expanded="true" signature="4800:4892" ph="update t_student... " />
+            <marker date="1521278631050" expanded="true" signature="5128:5265" ph="select numbe... t_student" />
+            <marker date="1521278631050" expanded="true" signature="5128:5275" ph="select numbe... t_student" />
+            <marker date="1521278631050" expanded="true" signature="5128:5282" ph="select numbe... t_student" />
+            <marker date="1521278631050" expanded="true" signature="5549:5770" ph="insert into t_teacher... " />
+            <marker date="1521278631050" expanded="true" signature="6029:6127" ph="update t_teacher... " />
+            <marker date="1521278631050" expanded="true" signature="6372:6464" ph="update t_teacher... " />
+            <marker date="1521278631050" expanded="true" signature="6714:6913" ph="select id, n... t_teacher" />
+            <marker date="1521278631050" expanded="true" signature="6714:6930" ph="select id, n... t_teacher" />
+            <marker date="1521278631050" expanded="true" signature="7090:7252" ph="select t_cou... t_course" />
+            <marker date="1521278631050" expanded="true" signature="7638:7692" ph="select * fro... v_score" />
+            <marker date="1521278631050" expanded="true" signature="7660:7692" ph="select t_stu... t_student" />
+            <marker date="1521278631050" expanded="true" signature="7980:8049" ph="select id fr... t_student" />
+            <marker date="1521278631050" expanded="true" signature="8212:8275" ph="select id fr... t_course" />
+            <marker date="1521278631050" expanded="true" signature="8410:8558" ph="update t_score... " />
+            <marker date="1521278631050" expanded="true" signature="8738:8957" ph="insert into t_course... " />
+            <marker date="1521278631050" expanded="true" signature="9207:9315" ph="update t_course... " />
+            <marker date="1521278631050" expanded="true" signature="9539:9630" ph="update t_course... " />
+            <marker date="1521278631050" expanded="true" signature="9868:10005" ph="select numbe... t_course" />
+            <marker date="1521278631050" expanded="true" signature="9868:10022" ph="select numbe... t_course" />
+            <marker date="1521278631050" expanded="true" signature="10326:10469" ph="select cours... t_course" />
+            <marker date="1521278631050" expanded="true" signature="10777:10828" ph="select id fr... t_course" />
+            <marker date="1521278631050" expanded="true" signature="10991:11061" ph="select id fr... t_teacher" />
+            <marker date="1521278631050" expanded="true" signature="11197:11323" ph="insert into t_teacher_course... " />
+            <marker date="1521278631050" expanded="true" signature="11527:11552" ph="select name t_course" />
+            <marker date="1521278631050" expanded="true" signature="11527:11569" ph="select name t_course" />
+            <marker date="1521278631050" expanded="true" signature="11868:11937" ph="select id fr... t_student" />
+            <marker date="1521278631050" expanded="true" signature="12100:12163" ph="select id fr... t_course" />
+            <marker date="1521278631050" expanded="true" signature="12333:12480" ph="insert into t_score... " />
+            <marker date="1521278631050" expanded="true" signature="12711:12741" ph="drop table i... " />
+            <marker date="1521278631050" expanded="true" signature="12865:12906" ph="select * fro... v_score" />
+            <marker date="1521278631050" expanded="true" signature="12865:12917" ph="select * fro... v_score" />
+            <marker date="1521278631050" expanded="true" signature="12865:12918" ph="select * fro... v_score" />
+            <marker date="1521278631050" expanded="true" signature="15380:15526" ph="insert into t_student... " />
+          </folding>
         </state>
       </provider>
     </entry>
